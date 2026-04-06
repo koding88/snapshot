@@ -1,0 +1,147 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+
+const leftFilmMarks = [24, 62, 101, 140, 179, 218, 257, 296, 335];
+const rightFilmMarks = [30, 242];
+
+export default function CinematicStory() {
+  return (
+    <section className="relative overflow-hidden bg-transparent text-[#f2e8cf]">
+      <div className="flex min-h-screen flex-col items-center px-8 pt-16 md:hidden">
+        <div className="relative mt-4 aspect-[4/5] w-full max-w-[320px] bg-black p-4 shadow-2xl">
+          <div className="absolute left-1 top-4 flex flex-col gap-2">
+            {[...Array(12)].map((_, i) => (
+              <div key={`l-${i}`} className="h-3 w-4 border-[0.5px] border-white/30 bg-black/40" />
+            ))}
+          </div>
+          <div className="absolute right-1 top-4 flex flex-col gap-2">
+            {[...Array(12)].map((_, i) => (
+              <div key={`r-${i}`} className="h-3 w-4 border-[0.5px] border-white/30 bg-black/40" />
+            ))}
+          </div>
+
+          <div className="relative h-full w-full overflow-hidden rounded-sm">
+            <Image
+              src="https://fixteamstudio.com/wp-content/uploads/2023/07/1.jpg"
+              alt="Cinematic Story"
+              fill
+              className="object-cover grayscale"
+              priority
+            />
+          </div>
+
+          <div className="absolute -right-2 -top-2 h-4 w-4 border-r-2 border-t-2 border-white/20" />
+          <div className="absolute top-2 right-2 text-[8px] text-white/40 uppercase tracking-tighter font-mono">▲ 12.5A</div>
+          <div className="absolute bottom-2 right-2 flex items-center gap-1">
+            <div className="h-3 w-2 bg-white/20" />
+            <div className="h-1.5 w-1.5 bg-white/40 rotate-45" />
+          </div>
+        </div>
+
+        <div className="mt-1 pl-12 self-start">
+          <motion.h2
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="font-serif text-[2.1rem] font-bold leading-[0.85] tracking-[0.12em] text-[#f2e8cf]"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            CINEMATIC<br />
+            LOVE<br />
+            STORIES
+          </motion.h2>
+        </div>
+
+        <div className="mt-2 max-w-[280px] self-end text-right">
+          <p
+            className="font-serif text-[0.7rem] italic leading-[2.4] tracking-[0.42em] text-[#ffc89a]"
+          >
+            We adore quiet,<br />
+            minimalistic and esthetic<br />
+            photography,<br />
+            that feels like scenes from a<br />
+            film.
+          </p>
+        </div>
+
+        <div className="mt-auto pb-12 w-full px-4">
+          <p className="font-serif text-[0.54rem] font-semibold uppercase tracking-[0.34em] text-black text-center leading-[2.4]">
+            <span className="inline-block whitespace-nowrap">Ödəniş üsullarının müxtəlifliyi</span><br />
+            <span className="inline-block whitespace-nowrap">Mostbet ilə sürətli depozit và çıxarış</span><br />
+            <span className="inline-block whitespace-nowrap">təmin edir.</span>
+          </p>
+        </div>
+      </div>
+
+      <div className="hidden mx-auto min-h-[112vh] max-w-[1600px] items-center px-6 py-12 sm:px-10 md:flex md:px-16 lg:px-24 xl:px-32">
+        <div className="grid w-full grid-cols-1 items-center gap-y-16 lg:-translate-y-28 lg:grid-cols-[minmax(0,1.18fr)_minmax(320px,0.72fr)] lg:items-end lg:gap-x-20">
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.4 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-[760px] lg:flex lg:min-h-[540px] lg:items-end"
+          >
+            <div className="ml-0 lg:ml-10 lg:w-full xl:ml-16">
+              <h2
+                className="font-serif text-[1.5rem] leading-[0.9] tracking-[0.08em] sm:text-[1.85rem] md:text-[2.2rem] lg:translate-x-16 lg:text-[2.55rem]"
+                style={{
+                  color: '#ffebdd',
+                  fontStyle: 'normal',
+                  fontWeight: 200,
+                  textTransform: 'capitalize',
+                }}
+              >
+                Cinematic
+                <br />
+                Love Stories
+              </h2>
+
+              <div className="mt-10 flex justify-end lg:mt-12 lg:pr-2">
+                <p className="max-w-[38rem] text-right font-serif text-[0.72rem] leading-[2.6] tracking-[0.52em] text-[#ffc89a] sm:text-[0.78rem] md:text-[0.86rem]">
+                  We adore quiet,
+                  <br />
+                  minimalistic and esthetic photography,
+                  <br />
+                  that feels like scenes from a film.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 42 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.4 }}
+            transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1] }}
+            className="flex justify-center lg:justify-start"
+          >
+            <div className="relative w-[240px] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:w-[280px] md:w-[300px] aspect-[0.68]">
+              <Image
+                src="https://fixteamstudio.com/wp-content/uploads/2023/07/1.jpg"
+                alt="Cinematic Love Story"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 70vw, 300px"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.7 }}
+        transition={{ delay: 0.25, duration: 1 }}
+        className="hidden md:block absolute inset-x-0 bottom-[29%] px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32"
+      >
+        <p className="mx-auto max-w-[1200px] text-center font-serif text-[0.72rem] font-semibold tracking-[0.42em] text-black sm:text-[0.82rem] md:text-[0.92rem]">
+          Ödəniş üsullarının müxtəlifliyi Mostbet ilə sürətli depozit và çıxarış təmin edir.
+        </p>
+      </motion.div>
+    </section>
+  );
+}
