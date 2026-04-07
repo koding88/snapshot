@@ -8,7 +8,7 @@ export default function AboutPage() {
     <main className="relative min-h-screen bg-black">
       <Navbar />
 
-      <div className="pt-[160px] md:pt-[580px]">
+      <div className="">
         <AboutUs />
       </div>
       <InstagramFollow />

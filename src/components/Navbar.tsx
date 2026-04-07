@@ -1,17 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import {
   Instagram,
   Facebook,
-  Search,
   X,
-  LayoutGrid,
   Plus,
-  Minus,
-  ArrowLeft,
-  ArrowRight,
+  Globe,
+  ChevronDown,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -31,41 +28,51 @@ const MenuIcon = ({ size = 24, strokeWidth = 1.2 }) => (
   </svg>
 );
 
+const languages = [
+  { code: 'en', label: 'EN' },
+  { code: 'vi', label: 'VN' },
+  { code: 'zh', label: 'CN' },
+];
+
 export default function Navbar({
-  forceVisible = false,
+  forceVisible: _forceVisible = false,
   manualHidden = false,
-  isLightbox = false,
+  isLightbox: _isLightbox = false,
 }: {
   forceVisible?: boolean;
   manualHidden?: boolean;
   isLightbox?: boolean;
 }) {
-  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isGalleriesOpen, setIsGalleriesOpen] = useState(false);
   const [isGalleriesHovered, setIsGalleriesHovered] = useState(false);
+  const [currentLang, setCurrentLang] = useState('en');
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll();
   const pathname = usePathname();
 
   const isEditorial = pathname === '/' || pathname === '/contact';
-  const textColor = isEditorial ? 'text-white' : 'text-black';
-  const bgColor = isEditorial ? 'bg-transparent' : 'bg-white shadow-sm';
-  const navHeight =
-    isEditorial && pathname === '/' && !isLightbox
-      ? 'h-[450px] md:h-[650px]'
-      : 'h-[135px] md:h-[480px]';
-  const topPadding = 'pt-0 md:pt-40';
-  const navLinksTop =
-    isEditorial && pathname === '/' && !isLightbox
-      ? 'top-[150px] md:top-[320px]'
-      : 'top-[240px] md:top-[360px]';
-  const navPosition =
-    (isEditorial && pathname !== '/' && !pathname.startsWith('/galleries')) ? 'absolute' : 'fixed';
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setHidden(latest > 50);
+    setScrolled(latest > 30);
   });
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setIsLangOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const showSolid = scrolled || !isEditorial;
+  const textColor = showSolid ? 'text-black' : 'text-white';
+  const bgClass = showSolid ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent';
 
   const menuItems = [
     { name: 'Home', href: '/' },
@@ -86,93 +93,44 @@ export default function Navbar({
     <>
       <motion.nav
         variants={{
-          visible: { opacity: 1, pointerEvents: 'auto' },
-          hidden: { opacity: 0, pointerEvents: 'none' },
+          visible: { y: 0, opacity: 1, pointerEvents: 'auto' as const },
+          hidden: { y: -100, opacity: 0, pointerEvents: 'none' as const },
         }}
         initial="visible"
         animate={
-          ((manualHidden || (hidden && !forceVisible)) && navPosition === 'fixed' && !isMenuOpen)
-            ? 'hidden'
-            : 'visible'
+          manualHidden && !isMenuOpen ? 'hidden' : 'visible'
         }
-        transition={{ duration: 0.2, ease: 'linear' }}
-        className={`${navPosition} inset-x-0 top-0 z-[100] transition-all duration-200 ${bgColor} ${navHeight}`}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed inset-x-0 top-0 z-100 transition-colors duration-300 ${bgClass}`}
       >
-        <div className="flex w-full max-w-full items-start justify-between px-6 pt-6 md:hidden">
-          <div className="mt-7 flex w-[70px] flex-col items-center justify-center">
-            <div className={`mb-3 h-[1px] w-full ${isEditorial ? 'bg-white' : 'bg-black'} opacity-60`} />
-            <button aria-label="Search" className={textColor}>
-              <Search size={22} strokeWidth={1.2} />
-            </button>
-            <div className={`mt-3 h-[1px] w-full ${isEditorial ? 'bg-white' : 'bg-black'} opacity-60`} />
-          </div>
+        <div className="mx-auto flex h-17.5 max-w-420 items-center justify-between px-6 md:px-12 lg:px-16">
 
-          <Link href="/" className="flex flex-1 justify-center">
+          {/* Left: Logo */}
+          <Link href="/" className="shrink-0">
             <Image
               src="https://fixteamstudio.com/wp-content/uploads/2023/11/logo.png"
               alt="Logo"
               width={200}
               height={200}
-              className={`h-auto w-44 ${!isEditorial ? 'invert' : ''}`}
+              className={`h-14 w-auto transition-all ${showSolid ? 'invert' : ''}`}
               priority
             />
           </Link>
 
-          <div className="mt-7 flex w-[70px] flex-col items-center justify-center">
-            <div className={`mb-3 h-[1px] w-full ${isEditorial ? 'bg-white' : 'bg-black'} opacity-60`} />
-            <button onClick={() => setIsMenuOpen(true)} aria-label="Menu" className={textColor}>
-              <MenuIcon size={24} strokeWidth={1.2} />
-            </button>
-            <div className={`mt-3 h-[1px] w-full ${isEditorial ? 'bg-white' : 'bg-black'} opacity-60`} />
-          </div>
-        </div>
-
-        <div className={`absolute inset-x-0 top-0 hidden items-start justify-between px-12 md:flex md:px-32 ${topPadding}`}>
-          <div className={`ml-12 flex items-center gap-8 transition-all md:ml-24 ${textColor}`}>
-            <Link href="#" className="transition-all hover:text-accent">
-              <Facebook size={18} strokeWidth={1} />
-            </Link>
-            <Link href="#" className="transition-all hover:text-accent">
-              <PinterestIcon size={18} />
-            </Link>
-            <Link href="#" className="transition-all hover:text-accent">
-              <Instagram size={18} strokeWidth={1} />
-            </Link>
-          </div>
-
-          <div className="absolute left-1/2 top-10 flex -translate-x-1/2 flex-col items-center transition-all duration-300 md:top-14">
-            <Link href="/" className="group flex flex-col items-center">
-              <Image
-                src="https://fixteamstudio.com/wp-content/uploads/2023/11/logo.png"
-                alt="Logo"
-                width={500}
-                height={500}
-                className={`h-32 w-auto transition-all md:h-[240px] ${!isEditorial ? 'invert' : ''}`}
-                priority
-              />
-            </Link>
-          </div>
-
-          <div className={`mr-8 flex items-center transition-opacity md:mr-16 ${textColor}`}>
-            <button className="transition-all hover:text-accent" aria-label="Search">
-              <Search size={22} strokeWidth={1.5} />
-            </button>
-          </div>
-        </div>
-
-        <div className={`absolute inset-x-0 hidden w-full justify-center transition-all duration-500 md:flex ${navLinksTop}`}>
-          <div className={`flex flex-wrap items-center justify-center gap-12 text-[12px] font-bold uppercase tracking-[0.6em] md:gap-14 md:text-[15px] ${textColor}`}>
+          {/* Center: Nav links (desktop) */}
+          <div className="hidden items-center gap-8 md:flex lg:gap-10">
             {menuItems.map((item) => (
               <div
                 key={item.name}
-                className="relative py-2"
+                className="relative"
                 onMouseEnter={() => item.name === 'Galleries' && setIsGalleriesHovered(true)}
                 onMouseLeave={() => item.name === 'Galleries' && setIsGalleriesHovered(false)}
               >
                 <Link
                   href={item.href}
-                  className={`border-b-2 pb-1.5 transition-all hover:text-accent ${item.name === 'Galleries' && isGalleriesHovered ? 'border-accent' : 'border-transparent'
-                    }`}
+                  className={`border-b-2 pb-0.5 text-[11px] font-bold uppercase tracking-[0.3em] transition-all hover:opacity-70 lg:text-[13px] ${textColor} ${
+                    pathname === item.href ? 'border-current' : 'border-transparent'
+                  }`}
                 >
                   {item.name}
                 </Link>
@@ -181,18 +139,18 @@ export default function Navbar({
                   <AnimatePresence>
                     {isGalleriesHovered && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute left-1/2 top-full mt-4 w-[360px] -translate-x-1/2 bg-[#bcab9b] p-10 shadow-[0_32px_80px_rgba(0,0,0,0.12)]"
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute left-1/2 top-full z-50 mt-5 w-75 -translate-x-1/2 bg-[#bcab9b] p-8 shadow-[0_24px_60px_rgba(0,0,0,0.15)]"
                       >
-                        <div className="flex flex-col items-center gap-8 py-4">
+                        <div className="flex flex-col items-center gap-6">
                           {galleryLinks.map((subLink) => (
                             <Link
                               key={subLink.name}
                               href={subLink.href}
-                              className="font-serif text-[0.88rem] font-bold uppercase tracking-[0.38em] text-white whitespace-nowrap transition-opacity hover:opacity-75"
+                              className="text-[0.8rem] font-bold uppercase tracking-[0.3em] text-white whitespace-nowrap transition-opacity hover:opacity-75"
                             >
                               {subLink.name}
                             </Link>
@@ -205,9 +163,79 @@ export default function Navbar({
               </div>
             ))}
           </div>
+
+          {/* Right: Social icons + Language selector (desktop) + Hamburger (mobile) */}
+          <div className="flex items-center gap-5">
+            {/* Social icons - desktop only */}
+            <div className={`hidden items-center gap-4 md:flex ${textColor}`}>
+              <Link href="#" className="transition-opacity hover:opacity-60">
+                <Facebook size={16} strokeWidth={1.2} />
+              </Link>
+              <Link href="#" className="transition-opacity hover:opacity-60">
+                <PinterestIcon size={16} />
+              </Link>
+              <Link href="#" className="transition-opacity hover:opacity-60">
+                <Instagram size={16} strokeWidth={1.2} />
+              </Link>
+            </div>
+
+            {/* Divider - desktop only */}
+            <div className={`hidden h-5 w-px md:block ${showSolid ? 'bg-black/20' : 'bg-white/30'}`} />
+
+            {/* Language selector */}
+            <div ref={langRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setIsLangOpen((prev) => !prev)}
+                className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 ${textColor}`}
+              >
+                <Globe size={14} />
+                <span>{languages.find((l) => l.code === currentLang)?.label}</span>
+                <ChevronDown size={12} className={`transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              <AnimatePresence>
+                {isLangOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 4 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full z-50 mt-3 min-w-25 overflow-hidden rounded-md bg-white py-1 shadow-lg"
+                  >
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        type="button"
+                        onClick={() => {
+                          setCurrentLang(lang.code);
+                          setIsLangOpen(false);
+                        }}
+                        className={`flex w-full px-4 py-2 text-left text-[12px] font-medium tracking-wider transition-colors hover:bg-gray-100 ${
+                          currentLang === lang.code ? 'bg-gray-50 text-black' : 'text-gray-600'
+                        }`}
+                      >
+                        {lang.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Hamburger - mobile only */}
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              aria-label="Menu"
+              className={`md:hidden ${textColor}`}
+            >
+              <MenuIcon size={24} strokeWidth={1.2} />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -215,39 +243,27 @@ export default function Navbar({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[200] bg-[#6e8787] text-black"
+            className="fixed inset-0 z-200 bg-[#6e8787] text-black"
           >
             <div className="flex h-full flex-col px-6 pb-8 pt-6">
-              <div className="flex items-start justify-between">
-                <div className="mt-7 flex w-[70px] flex-col items-center justify-center">
-                  <div className="mb-3 h-[1px] w-full bg-black/70" />
-                  <button aria-label="Search" className="text-black">
-                    <Search size={22} strokeWidth={1} />
-                  </button>
-                  <div className="mt-3 h-[1px] w-full bg-black/70" />
-                </div>
-
-                <Link href="/" className="flex flex-1 justify-center" onClick={() => setIsMenuOpen(false)}>
+              <div className="flex items-center justify-between">
+                <Link href="/" className="shrink-0" onClick={() => setIsMenuOpen(false)}>
                   <Image
                     src="https://fixteamstudio.com/wp-content/uploads/2023/11/logo.png"
                     alt="Logo"
                     width={200}
                     height={200}
-                    className="h-auto w-44 invert"
+                    className="h-12 w-auto invert"
                     priority
                   />
                 </Link>
 
-                <div className="mt-7 flex w-[70px] flex-col items-center justify-center">
-                  <div className="mb-3 h-[1px] w-full bg-black/70" />
-                  <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu" className="text-black">
-                    <X size={24} strokeWidth={1.3} />
-                  </button>
-                  <div className="mt-3 h-[1px] w-full bg-black/70" />
-                </div>
+                <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu" className="text-black">
+                  <X size={24} strokeWidth={1.3} />
+                </button>
               </div>
 
-              <div className="flex flex-1 flex-col overflow-hidden px-8 pt-12">
+              <div className="flex flex-1 flex-col overflow-hidden px-4 pt-12">
                 <div className="flex w-full gap-6">
                   <motion.span
                     animate={{ height: isGalleriesOpen ? 420 : 210 }}
@@ -256,94 +272,95 @@ export default function Navbar({
                   />
 
                   <div className="flex flex-1 flex-col gap-8 pb-12">
-                    {menuItems.map((item, idx) => {
-                      return (
-                        <motion.div
-                          key={item.name}
-                          initial={{ opacity: 0, y: 16 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.08 * idx + 0.2 }}
-                          className="flex flex-col"
-                        >
-                          <div className="flex items-center justify-between">
-                            <Link
-                              href={item.href}
-                              onClick={() => setIsMenuOpen(false)}
-                              className="font-serif text-[0.82rem] font-semibold tracking-[0.2em] text-black transition-opacity hover:opacity-70"
-                              style={{ fontFamily: "'Playfair Display', serif" }}
+                    {menuItems.map((item, idx) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.08 * idx + 0.2 }}
+                        className="flex flex-col"
+                      >
+                        <div className="flex items-center justify-between">
+                          <Link
+                            href={item.href}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="font-serif text-[0.82rem] font-semibold tracking-[0.2em] text-black transition-opacity hover:opacity-70"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                          >
+                            {item.name}
+                          </Link>
+
+                          {item.name === 'Galleries' && (
+                            <button
+                              type="button"
+                              aria-label="Toggle galleries"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setIsGalleriesOpen((prev) => !prev);
+                              }}
+                              className="pr-2 text-black/80 transition-opacity hover:text-black"
                             >
-                              {item.name}
-                            </Link>
+                              {isGalleriesOpen ? <X size={18} strokeWidth={1.5} /> : <Plus size={18} strokeWidth={1.5} />}
+                            </button>
+                          )}
+                        </div>
 
-                            {item.name === 'Galleries' && (
-                              <button
-                                type="button"
-                                aria-label="Toggle galleries"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setIsGalleriesOpen((prev) => !prev);
-                                }}
-                                className="pr-2 text-black/80 transition-opacity hover:text-black"
-                              >
-                                {isGalleriesOpen ? <X size={18} strokeWidth={1.5} /> : <Plus size={18} strokeWidth={1.5} />}
-                              </button>
-                            )}
-                          </div>
-
-                          <AnimatePresence>
-                            {item.name === 'Galleries' && isGalleriesOpen && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                                className="overflow-hidden"
-                              >
-                                <div className="flex flex-col gap-6 pl-5 pt-7">
-                                  {galleryLinks.map((subLink) => (
-                                    <Link
-                                      key={subLink.name}
-                                      href={subLink.href}
-                                      onClick={() => setIsMenuOpen(false)}
-                                      className="font-serif text-[0.7rem] font-medium tracking-[0.22em] text-black/65 transition-colors hover:text-black"
-                                      style={{ fontFamily: "'Playfair Display', serif" }}
-                                    >
-                                      {subLink.name}
-                                    </Link>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </motion.div>
-                      );
-                    })}
+                        <AnimatePresence>
+                          {item.name === 'Galleries' && isGalleriesOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                              className="overflow-hidden"
+                            >
+                              <div className="flex flex-col gap-6 pl-5 pt-7">
+                                {galleryLinks.map((subLink) => (
+                                  <Link
+                                    key={subLink.name}
+                                    href={subLink.href}
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="font-serif text-[0.7rem] font-medium tracking-[0.22em] text-black/65 transition-colors hover:text-black"
+                                    style={{ fontFamily: "'Playfair Display', serif" }}
+                                  >
+                                    {subLink.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              <div className="mx-2 mt-auto border-t border-black/60 pt-8 pb-4">
+              <div className="mx-2 mt-auto border-t border-black/60 pt-6 pb-4">
                 <div className="flex items-center justify-between px-2 text-black">
-                  <button
-                    type="button"
-                    aria-label="Previous"
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-black/60 transition-opacity hover:opacity-70"
-                  >
-                    <ArrowLeft size={18} strokeWidth={1.5} />
-                  </button>
-
-                  <div className="flex items-center gap-12">
-                    <Facebook size={20} strokeWidth={1.7} />
-                    <PinterestIcon size={20} />
+                  <div className="flex items-center gap-6">
+                    <Link href="#" className="transition-opacity hover:opacity-70">
+                      <Facebook size={20} strokeWidth={1.5} />
+                    </Link>
+                    <Link href="#" className="transition-opacity hover:opacity-70">
+                      <PinterestIcon size={20} />
+                    </Link>
+                    <Link href="#" className="transition-opacity hover:opacity-70">
+                      <Instagram size={20} strokeWidth={1.5} />
+                    </Link>
                   </div>
-
-                  <button
-                    type="button"
-                    aria-label="Next"
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-black/60 transition-opacity hover:opacity-70"
-                  >
-                    <ArrowRight size={18} strokeWidth={1.5} />
-                  </button>
+                  <div className="flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-wider">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        type="button"
+                        onClick={() => setCurrentLang(lang.code)}
+                        className={`transition-opacity hover:opacity-70 ${currentLang === lang.code ? 'text-black' : 'text-black/50'}`}
+                      >
+                        {lang.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ export default function GalleriesIndexPage() {
     <main className="relative min-h-screen bg-black">
       <Navbar />
 
-      <div className="relative pt-[160px] md:pt-[480px]">
+      <div className="relative ">
         <GalleriesMain />
       </div>
       

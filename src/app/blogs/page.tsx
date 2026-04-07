@@ -8,7 +8,7 @@ export default function BlogsPage() {
     <main className="relative min-h-screen bg-black">
       <Navbar />
 
-      <div className="pt-[160px] md:pt-[390px]">
+      <div className="">
         <Blogs />
       </div>
       <InstagramFollow />

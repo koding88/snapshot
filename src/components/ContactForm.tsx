@@ -1,8 +1,30 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
+const countries = [
+  'Vietnam', 'United States', 'United Kingdom', 'Australia', 'Canada', 'China',
+  'France', 'Germany', 'India', 'Indonesia', 'Italy', 'Japan', 'Korea',
+  'Malaysia', 'Philippines', 'Singapore', 'Spain', 'Taiwan', 'Thailand', 'Other',
+];
+
+const categories = ['Photo', 'Photo Tour', 'Films'];
+
+const pricePackages = [
+  'Basic – $500',
+  'Standard – $1,200',
+  'Premium – $2,500',
+  'Luxury – $5,000',
+  'Custom',
+];
+
+const howDidYouFindOptions = ['Search', 'Social media', 'Ads', 'Friends', 'Other'];
+
 export default function ContactForm() {
+  const [emailPrefix, setEmailPrefix] = useState('');
+  const [howFound, setHowFound] = useState('');
+
   return (
     <section className="bg-black px-8 pb-24 pt-16 text-white md:px-14 lg:px-24 lg:pb-32 lg:pt-24 xl:px-32">
       <div className="mx-auto max-w-[1500px]">
@@ -29,6 +51,7 @@ export default function ContactForm() {
             transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-9"
           >
+            {/* Name */}
             <div className="space-y-3">
               <label className="block text-[1rem] text-white">Your Name</label>
               <input
@@ -39,34 +62,36 @@ export default function ContactForm() {
               />
             </div>
 
+            {/* Email with @gmail.com suffix */}
             <div className="space-y-3">
               <label className="block text-[1rem] text-white">Your Email address</label>
-              <input
-                type="email"
-                required
-                placeholder="*"
-                className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.5rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
-              />
+              <div className="flex items-center overflow-hidden rounded-[4px] border border-white/45 transition-colors focus-within:border-white">
+                <input
+                  type="text"
+                  required
+                  placeholder="*"
+                  value={emailPrefix}
+                  onChange={(e) => setEmailPrefix(e.target.value)}
+                  className="h-[62px] flex-1 bg-transparent px-4 text-[1.5rem] text-white outline-none placeholder:text-white"
+                />
+                <span className="shrink-0 border-l border-white/25 bg-white/10 px-4 py-4 text-[0.95rem] text-white/70">
+                  @gmail.com
+                </span>
+              </div>
             </div>
 
+            {/* Where are you based? - Country select */}
             <div className="space-y-3">
               <label className="block text-[1rem] text-white">Where are you based?</label>
-              <input
-                type="text"
-                required
-                placeholder="*"
-                className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.5rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
-              />
-            </div>
-
-            <div className="space-y-3">
-              <label className="block text-[1rem] text-white">Enquiry Topic</label>
               <div className="relative">
-                <select className="h-[62px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors focus:border-white">
-                  <option className="bg-black">—Please choose an option—</option>
-                  <option className="bg-black">Wedding</option>
-                  <option className="bg-black">Elopement</option>
-                  <option className="bg-black">Couples Session</option>
+                <select
+                  required
+                  className="h-[62px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors focus:border-white"
+                >
+                  <option value="" className="bg-black">Select Country</option>
+                  {countries.map((c) => (
+                    <option key={c} value={c} className="bg-black">{c}</option>
+                  ))}
                 </select>
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[0.9rem] text-red-500">
                   ▼
@@ -74,16 +99,66 @@ export default function ContactForm() {
               </div>
             </div>
 
+            {/* Categories */}
             <div className="space-y-3">
-              <label className="block text-[1rem] text-white">How did you find Us?</label>
-              <input
-                type="text"
-                required
-                placeholder="*"
-                className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.5rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
-              />
+              <label className="block text-[1rem] text-white">Categories</label>
+              <div className="relative">
+                <select
+                  required
+                  className="h-[62px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors focus:border-white"
+                >
+                  <option value="" className="bg-black">—Please choose an option—</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat} className="bg-black">{cat}</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[0.9rem] text-red-500">
+                  ▼
+                </span>
+              </div>
             </div>
 
+            {/* Price / Package */}
+            <div className="space-y-3">
+              <label className="block text-[1rem] text-white">Price Package</label>
+              <div className="relative">
+                <select
+                  required
+                  className="h-[62px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors focus:border-white"
+                >
+                  <option value="" className="bg-black">—Select a package—</option>
+                  {pricePackages.map((pkg) => (
+                    <option key={pkg} value={pkg} className="bg-black">{pkg}</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[0.9rem] text-red-500">
+                  ▼
+                </span>
+              </div>
+            </div>
+
+            {/* How did you find Us? - Dropdown */}
+            <div className="space-y-3">
+              <label className="block text-[1rem] text-white">How did you find Us?</label>
+              <div className="relative">
+                <select
+                  value={howFound}
+                  onChange={(e) => setHowFound(e.target.value)}
+                  required
+                  className="h-[62px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors focus:border-white"
+                >
+                  <option value="" className="bg-black">—Please choose an option—</option>
+                  {howDidYouFindOptions.map((opt) => (
+                    <option key={opt} value={opt} className="bg-black">{opt}</option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[0.9rem] text-red-500">
+                  ▼
+                </span>
+              </div>
+            </div>
+
+            {/* Budget */}
             <div className="space-y-3">
               <label className="block text-[1rem] text-white">
                 Your photography budget (please specify the currency)
@@ -96,6 +171,7 @@ export default function ContactForm() {
               />
             </div>
 
+            {/* Tell your story */}
             <div className="space-y-3">
               <label className="block text-[1rem] text-white">
                 Tell us all about your story, your interests and your plans! (Share as much info as you like!)
