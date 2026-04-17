@@ -1,38 +1,26 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { COUNTRY_CODES, COUNTRY_NAME_TO_CODE } from '@/types/country-codes.constant';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { usePublicGalleries } from '@/hooks/useGalleries';
 import { usePublicPackages } from '@/hooks/usePackages';
 import { useRequestOrder } from '@/hooks/useOrders';
 
-const countries = [
-  { code: 'VN', name: 'Vietnam' },
-  { code: 'US', name: 'United States' },
-  { code: 'GB', name: 'United Kingdom' },
-  { code: 'AU', name: 'Australia' },
-  { code: 'CA', name: 'Canada' },
-  { code: 'CN', name: 'China' },
-  { code: 'FR', name: 'France' },
-  { code: 'DE', name: 'Germany' },
-  { code: 'IN', name: 'India' },
-  { code: 'ID', name: 'Indonesia' },
-  { code: 'IT', name: 'Italy' },
-  { code: 'JP', name: 'Japan' },
-  { code: 'KR', name: 'Korea' },
-  { code: 'MY', name: 'Malaysia' },
-  { code: 'PH', name: 'Philippines' },
-  { code: 'SG', name: 'Singapore' },
-  { code: 'ES', name: 'Spain' },
-  { code: 'TW', name: 'Taiwan' },
-  { code: 'TH', name: 'Thailand' },
-  { code: 'OTHER', name: 'Other' },
-];
+
+// Build country list with name and code for select
+const countries = Object.entries(COUNTRY_NAME_TO_CODE)
+  .map(([name, code]) => ({ code, name: name.replace(/\b\w/g, l => l.toUpperCase()) }))
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 const howDidYouFindOptions = ['Search', 'Social media', 'Ads', 'Friends', 'Other'];
 
+
 export default function ContactForm() {
+  const searchParams = useSearchParams();
+  const formRef = useRef<HTMLFormElement>(null);
   const t = useTranslations('ContactForm');
   const [name, setName] = useState('');
   const [emailPrefix, setEmailPrefix] = useState('');
@@ -50,6 +38,20 @@ export default function ContactForm() {
 
   const galleries = galleriesData?.items ?? [];
   const packages = packagesData?.items ?? [];
+
+  // Auto-select package if packageId is in query params
+  useEffect(() => {
+    const selected = searchParams?.get('packageId');
+    if (selected) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPackageId(selected);
+      // Scroll to form
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+    // eslint-disable-next-line
+  }, [searchParams]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -101,6 +103,7 @@ export default function ContactForm() {
 
         <div className="mt-20 grid grid-cols-1 gap-16 lg:mt-28 lg:grid-cols-2 lg:gap-24">
           <motion.form
+            ref={formRef}
             onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}

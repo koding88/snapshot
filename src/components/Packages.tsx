@@ -74,6 +74,7 @@ export default function Packages() {
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  
                 />
               </div>
 
@@ -115,8 +116,9 @@ export default function Packages() {
 
                 {/* CTA */}
                 <Link
-                  href={`/${currentLang}/contact`}
+                  href={`/${currentLang}/contact?packageId=${pkg.id}`}
                   className="mt-auto inline-block bg-[#c8b8ab] px-8 py-3 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:bg-[#d6c7bb]"
+                  scroll={false}
                 >
                   {t('requestNow')}
                 </Link>
