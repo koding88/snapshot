@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import GalleryLightbox from './GalleryLightbox';
+import { useTranslations } from 'next-intl';
 
 type GalleryCardProps = {
   src: string;
@@ -50,6 +51,7 @@ function GalleryCard({ src, alt, title, index, onClick, isLarge = false }: Galle
 }
 
 export default function GalleriesMain() {
+  const t = useTranslations('GalleriesMain');
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -89,7 +91,7 @@ export default function GalleriesMain() {
             className="font-serif text-[clamp(2.5rem,6vw,5.5rem)] font-light tracking-[0.05em] uppercase mb-4"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Galleries
+            {t('heading')}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
@@ -97,7 +99,7 @@ export default function GalleriesMain() {
             transition={{ duration: 1.5, delay: 0.5 }}
             className="font-sans text-[0.75rem] md:text-[0.85rem] tracking-[0.4em] uppercase opacity-80"
           >
-            Keep on Lovin
+            {t('keepOnLovin')}
           </motion.p>
         </div>
 

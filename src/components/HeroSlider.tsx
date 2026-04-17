@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const slides = [
   {
@@ -28,6 +29,7 @@ const slides = [
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
+  const t = useTranslations('HeroSlider');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -50,7 +52,7 @@ export default function HeroSlider() {
           <div className="relative w-full h-full overflow-hidden">
             <Image
               src={slides[current].image}
-              alt="Cinematic Background"
+              alt={t('imageAlt')}
               fill
               className="object-cover"
               priority
@@ -63,18 +65,18 @@ export default function HeroSlider() {
       <div className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 items-center gap-10 text-white/60 md:left-auto md:right-12 md:translate-x-0">
         <button
           onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
-          className="hover:text-white transition-colors"
+          className="hover:text-white transition-colors cursor-pointer"
         >
           <ChevronLeft size={16} strokeWidth={1} />
         </button>
 
         <div className="text-[11px] tracking-[0.4em] font-medium uppercase min-w-[80px] text-center">
-          {current + 1} of {slides.length}
+          {current + 1} {t('of')} {slides.length}
         </div>
 
         <button
           onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-          className="hover:text-white transition-colors"
+          className="hover:text-white transition-colors cursor-pointer"
         >
           <ChevronRight size={16} strokeWidth={1} />
         </button>

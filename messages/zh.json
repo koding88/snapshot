@@ -1,0 +1,178 @@
+{
+  "Navbar": {
+    "home": "首页",
+    "about": "关于我们",
+    "galleries": "作品集",
+    "packages": "套餐",
+    "blogs": "博客",
+    "contact": "联系我们",
+    "weddings": "婚礼",
+    "elopements": "私奔婚礼 - 婚前拍摄",
+    "couples": "情侣 - 家庭",
+    "films": "婚礼影片"
+  },
+  "HeroSlider": {
+    "of": "共",
+    "imageAlt": "电影感背景"
+  },
+  "CinematicStory": {
+    "titleLine1": "电影感",
+    "titleLine2": "爱情",
+    "titleLine3": "故事",
+    "titleDesktop1": "电影感",
+    "titleDesktop2": "爱情故事",
+    "quote1": "我们热爱宁静，",
+    "quote2": "极简而富有美感的摄影，",
+    "quote3": "如同电影中的场景。"
+  },
+  "PortfolioGrid": {
+    "titleMobile1": "镜头背后",
+    "titleMobile2": "的那些",
+    "titleMobile3": "人",
+    "titleDesktop1": "镜头背后的",
+    "titleDesktop2": "那些人",
+    "intro": "我们是 Trung 和 Vân — 越南私奔婚礼与亲密婚礼摄影师",
+    "body": "越南的美丽土地以及许多其他目的地，是我们记录订婚、婚礼和私奔婚礼的舞台。无论你的目的地在哪里，我们都会到达，记录你的婚礼。我们将通过充满情感的视觉语言讲述你的故事。我们将在场，捕捉你最真实的感受，你们之间所有独特的时刻，将它们置于周围风景的美丽之中。你想要进一步了解吗？",
+    "readMore": "了解更多"
+  },
+  "RecentStories": {
+    "heading": "近期故事",
+    "weddings": "婚礼",
+    "elopements": "私奔婚礼 - 婚前拍摄",
+    "couples": "情侣 - 家庭"
+  },
+  "FeaturedPhotography": {
+    "titleLine1": "精选",
+    "titleLine2": "婚礼与",
+    "titleLine3": "私奔婚礼",
+    "titleLine4": "摄影",
+    "photo0": "Huy & Diane | 河内之恋",
+    "photo1": "慢舞 | 午夜誓言",
+    "photo2": "亲密婚礼 | Thai & Linh",
+    "photo3": "Editorial 风格私奔婚礼 | 静谧时光",
+    "viewMore": "查看更多"
+  },
+  "NiceWords": {
+    "testimonials": [
+      {
+        "category": "美好评语",
+        "quote": "我们深深爱上了这次拍摄！照片浪漫而令人难忘。摄影师营造了温馨的氛围，帮助我们在镜头前放松。每张照片都传递了我们的情感和爱情故事。非常感谢！",
+        "author": "MARK & ANNA"
+      },
+      {
+        "category": "神奇的一天",
+        "quote": "真正神奇的体验。Snapshot Hanoi 捕捉了每一个无声的凝视和每一次开怀大笑。我们的婚礼相册就像一件艺术品，我们将永远珍藏。在河内心脏地带的极致专业。",
+        "author": "HUY & DIANE"
+      },
+      {
+        "category": "私奔婚礼",
+        "quote": "在越南记录我们的时刻是最正确的决定。团队让我们感到非常舒适，最终结果超出了所有期望。永恒、优雅、真实——正是我们梦想的那样。",
+        "author": "SANDRA & OLIVIER"
+      },
+      {
+        "category": "家庭",
+        "quote": "对细节的关注令人难以置信。他们不只是拍照；他们通过镜头讲述了我们的故事。氛围亲密，他们保存的回忆对我们家庭来说是无价的。",
+        "author": "SILKY & RON"
+      }
+    ]
+  },
+  "InstagramFollow": {
+    "cta": "在 Instagram 上关注我们"
+  },
+  "Footer": {
+    "tagline": "Snapshot Hanoi 为新型生活与工作方式而生。我们在世界各地创作美丽的摄影作品。",
+    "servicesHeading": "服务",
+    "portfolio": "作品集",
+    "pricing": "价格",
+    "clientStories": "客户故事",
+    "resourcesHeading": "资源",
+    "blog": "博客",
+    "guides": "指南与教程",
+    "helpCenter": "帮助中心",
+    "companyHeading": "公司",
+    "aboutUs": "关于我们",
+    "careers": "招聘",
+    "mediaKit": "媒体资料包",
+    "bookHeading": "预约拍摄",
+    "bookSubtitle": "免费开始。随着需求增长添加整个团队。",
+    "bookToday": "立即预约",
+    "languageLabel": "中文",
+    "terms": "条款与隐私",
+    "security": "安全",
+    "status": "状态",
+    "copyright": "Snapshot Hanoi LLC."
+  },
+  "AboutUs": {
+    "headline1": "在你分享",
+    "headline2": "你的",
+    "headline3": "故事之前。",
+    "studioName": "Snapshot Hanoi",
+    "bio0": "我们是 Trung 和 Vân，生活和艺术中的伴侣。我们的旅程始于 2013 年河内充满活力的街道，并于 2014 年 1 月许下誓言。自 2012 年以来，我们将生命奉献于通过婚礼和私奔婚礼捕捉爱的本质。如今，我们以河内为家，在两个女儿琼芝和琼诗的欢声笑语中成长，而我们的工作带我们走遍越南、亚洲乃至更远的地方。",
+    "bio1": "经过十年探索摄影世界的每个角落，我们发现在讲述情侣故事时心跳最快。我们对刻意摆拍的完美不感兴趣；相反，我们热衷于原始、真实的情感——安静的低语、无拘束的欢笑，以及使你的故事独一无二的真实感受。我们的风格是电影氛围与纪录片真实的融合，通过徕卡 M 系统的永恒镜头捕捉。",
+    "bio2": "我们的视野获得全球认可，荣幸地跻身精英之列。从 2023 年被评为越南最佳婚礼摄影师，到 2025 年跻身全球 Top 20 婚礼摄影师，这些荣誉是我们对叙事艺术承诺的见证。",
+    "awardsHeading": "奖项",
+    "awards": [
+      "2025 年全球 Top 20 婚礼摄影师",
+      "2025 年全球 Top 2 情侣摄影师",
+      "2024 年全球 Top 50 婚礼摄影师",
+      "2024 年全球 Top 5 情侣摄影师",
+      "2023 年越南最佳婚礼摄影师",
+      "2023 年河内最佳婚礼摄影师"
+    ],
+    "bookNow": "立即预约"
+  },
+  "ContactForm": {
+    "heading": "联系我们",
+    "nameLabel": "您的姓名",
+    "emailLabel": "您的电子邮件地址",
+    "countryLabel": "您在哪个国家？",
+    "categoriesLabel": "服务类别",
+    "pricePackageLabel": "价格套餐",
+    "howFoundLabel": "您如何找到我们？",
+    "budgetLabel": "您的摄影预算（请注明货币单位）",
+    "storyLabel": "请告诉我们您的故事、兴趣和计划！（欢迎分享任何信息）",
+    "submitLabel": "发送消息",
+    "successMessage": "您的请求已成功发送！请检查您的电子邮件以确认。",
+    "contactDesc": "我们很想了解您和您的婚礼计划！请在下面的联系表格中填写一些详细信息，我们会尽快回复您。期待与您交流！",
+    "officeLabel": "办公室：",
+    "mailLabel": "邮箱：",
+    "whatsappLabel": "Whatsapp："
+  },
+  "GalleriesMain": {
+    "heading": "作品集",
+    "keepOnLovin": "继续热爱"
+  },
+  "Blogs": {
+    "heading": "博客"
+  },
+  "BlogDetail": {
+    "backToBlogs": "返回博客",
+    "notFound": "未找到博客。",
+    "prev": "上一篇",
+    "next": "下一篇"
+  },
+  "OrderConfirm": {
+    "invalidLink": "无效的确认链接",
+    "invalidLinkDesc": "确认链接缺失或无效。请检查您的邮箱并重试。",
+    "confirming": "正在确认您的订单",
+    "confirmingDesc": "请稍候，我们正在验证您的请求...",
+    "successTitle": "订单已确认！",
+    "successDesc": "您的订单已成功确认。我们会尽快与您联系。",
+    "errorTitle": "确认失败",
+    "errorDesc": "确认订单时出现问题，请重试。",
+    "retry": "重试"
+  },
+  "Packages": {
+    "heading": "套餐",
+    "bestFor": "适合",
+    "duration": "时长",
+    "minutes": "分钟",
+    "numberOfPhotos": "照片数量",
+    "editedPhotos": "张精修照片",
+    "requestNow": "立即咨询",
+    "note1": "费用不包括前往偏远地点的交通费、特殊交通工具（如船）费用，或迪士尼乐园、动物园、历史遗迹、别墅、博物馆和宫殿等景点的门票。",
+    "note2": "此价格表反映我们的标准套餐。如果您需要根据您的具体需求定制，请随时与我们联系。我们很乐意为您提供符合您独特要求的定制报价。",
+    "note3": "拍摄完成后，我们将在4个工作日内通过密码保护的在线画廊为您提供精修后的照片。",
+    "note4": "我们理解您的回忆有多么重要，因此我们会安全存储您的所有照片两年。如果您丢失了照片，我们将帮助您找回。"
+  }
+}

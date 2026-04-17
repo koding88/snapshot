@@ -2,11 +2,13 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 const leftFilmMarks = [24, 62, 101, 140, 179, 218, 257, 296, 335];
 const rightFilmMarks = [30, 242];
 
 export default function CinematicStory() {
+  const t = useTranslations('CinematicStory');
   return (
     <section className="relative overflow-hidden bg-transparent text-[#f2e8cf]">
       <div className="flex min-h-screen flex-col items-center px-8 pt-16 md:hidden">
@@ -47,9 +49,9 @@ export default function CinematicStory() {
             className="font-serif text-[2.1rem] font-bold leading-[0.85] tracking-[0.12em] text-[#f2e8cf]"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            CINEMATIC<br />
-            LOVE<br />
-            STORIES
+            {t('titleLine1')}<br />
+            {t('titleLine2')}<br />
+            {t('titleLine3')}
           </motion.h2>
         </div>
 
@@ -57,11 +59,9 @@ export default function CinematicStory() {
           <p
             className="font-serif text-[0.7rem] italic leading-[2.4] tracking-[0.42em] text-[#ffc89a]"
           >
-            We adore quiet,<br />
-            minimalistic and esthetic<br />
-            photography,<br />
-            that feels like scenes from a<br />
-            film.
+            {t('quote1')}<br />
+            {t('quote2')}<br />
+            {t('quote3')}
           </p>
         </div>
 
@@ -95,16 +95,16 @@ export default function CinematicStory() {
               >
                 Cinematic
                 <br />
-                Love Stories
+                {t('titleDesktop2')}
               </h2>
 
               <div className="mt-10 flex justify-end lg:mt-12 lg:pr-2">
                 <p className="max-w-[38rem] text-right font-serif text-[0.72rem] leading-[2.6] tracking-[0.52em] text-[#ffc89a] sm:text-[0.78rem] md:text-[0.86rem]">
                   We adore quiet,
                   <br />
-                  minimalistic and esthetic photography,
+                  {t('quote2')}
                   <br />
-                  that feels like scenes from a film.
+                  {t('quote3')}
                 </p>
               </div>
             </div>

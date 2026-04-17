@@ -1,0 +1,178 @@
+{
+  "Navbar": {
+    "home": "Trang chủ",
+    "about": "Về chúng tôi",
+    "galleries": "Bộ sưu tập",
+    "packages": "Gói dịch vụ",
+    "blogs": "Blog",
+    "contact": "Liên hệ",
+    "weddings": "Đám cưới",
+    "elopements": "Elopement - Chụp cưới ngoại cảnh",
+    "couples": "Couple - Gia đình",
+    "films": "Phim cưới"
+  },
+  "HeroSlider": {
+    "of": "trên",
+    "imageAlt": "Ảnh nền điện ảnh"
+  },
+  "CinematicStory": {
+    "titleLine1": "CÂU CHUYỆN",
+    "titleLine2": "TÌNH YÊU",
+    "titleLine3": "ĐIỆN ẢNH",
+    "titleDesktop1": "Câu chuyện",
+    "titleDesktop2": "Tình yêu điện ảnh",
+    "quote1": "Chúng tôi yêu thích sự yên lặng,",
+    "quote2": "nhiếp ảnh tối giản và thẩm mỹ,",
+    "quote3": "cảm giác như những cảnh phim."
+  },
+  "PortfolioGrid": {
+    "titleMobile1": "Những người",
+    "titleMobile2": "Đứng Sau",
+    "titleMobile3": "Ống Kính",
+    "titleDesktop1": "Những người đứng sau",
+    "titleDesktop2": "ống kính",
+    "intro": "Chúng tôi là Trung và Vân — nhiếp ảnh gia elopement và đám cưới thân mật tại Việt Nam",
+    "body": "Những vùng đất tươi đẹp của Việt Nam, cũng như nhiều điểm đến khác, là sân chơi nơi chúng tôi ghi lại hành trình đính hôn, đám cưới, elopement. Dù đích đến của bạn ở đâu, chúng tôi sẽ đến để ghi lại đám cưới của bạn. Chúng tôi sẽ kể câu chuyện của bạn qua ngôn ngữ thị giác đầy cảm xúc. Chúng tôi sẽ có mặt để bắt trọn những cảm xúc chân thực nhất, tất cả những khoảnh khắc độc đáo giữa hai bạn, đặt trong vẻ đẹp của thiên nhiên xung quanh. Bạn có muốn khám phá thêm không?",
+    "readMore": "Xem thêm"
+  },
+  "RecentStories": {
+    "heading": "Câu chuyện gần đây",
+    "weddings": "Đám cưới",
+    "elopements": "Elopement - Chụp cưới",
+    "couples": "Couple - Gia đình"
+  },
+  "FeaturedPhotography": {
+    "titleLine1": "Nhiếp ảnh",
+    "titleLine2": "Đám cưới &",
+    "titleLine3": "Elopement",
+    "titleLine4": "Nổi bật",
+    "photo0": "Huy & Diane | Tình yêu tại Hà Nội",
+    "photo1": "Vũ điệu chậm | Lời nguyện ước nửa đêm",
+    "photo2": "Đám cưới thân mật | Thái & Linh",
+    "photo3": "Elopement phong cách editorial | Những khung hình lặng yên",
+    "viewMore": "Xem thêm"
+  },
+  "NiceWords": {
+    "testimonials": [
+      {
+        "category": "Lời hay ý đẹp",
+        "quote": "Chúng tôi đã yêu ngay bộ ảnh này! Nó thật sự lãng mạn và đáng nhớ. Nhiếp ảnh gia tạo ra bầu không khí ấm cúng và giúp chúng tôi thoải mái trước ống kính. Mỗi bức ảnh truyền tải cảm xúc và câu chuyện tình yêu của chúng tôi. Cảm ơn rất nhiều!",
+        "author": "MARK & ANNA"
+      },
+      {
+        "category": "Ngày kỳ diệu",
+        "quote": "Một trải nghiệm thực sự kỳ diệu. Snapshot Hanoi đã bắt trọn từng ánh mắt lặng thầm và từng tiếng cười vang. Album cưới của chúng tôi như một tác phẩm nghệ thuật mà chúng tôi sẽ trân trọng mãi mãi. Sự chuyên nghiệp đỉnh cao giữa lòng Hà Nội.",
+        "author": "HUY & DIANE"
+      },
+      {
+        "category": "Elopement",
+        "quote": "Ghi lại những khoảnh khắc tại Việt Nam là quyết định đúng đắn nhất. Đội ngũ khiến chúng tôi cảm thấy rất thoải mái, và kết quả cuối cùng vượt xa mọi kỳ vọng. Vượt thời gian, thanh lịch và chân thực — đúng như những gì chúng tôi mơ ước.",
+        "author": "SANDRA & OLIVIER"
+      },
+      {
+        "category": "Gia đình",
+        "quote": "Sự chú ý đến từng chi tiết thật đáng kinh ngạc. Họ không chỉ chụp ảnh; họ kể câu chuyện của chúng tôi qua ống kính. Bầu không khí thân mật và những ký ức họ lưu giữ là vô giá đối với gia đình chúng tôi.",
+        "author": "SILKY & RON"
+      }
+    ]
+  },
+  "InstagramFollow": {
+    "cta": "Theo dõi chúng tôi trên Instagram"
+  },
+  "Footer": {
+    "tagline": "Snapshot Hanoi được tạo ra cho những cách sống và làm việc mới. Chúng tôi tạo ra những bức ảnh đẹp trên khắp thế giới.",
+    "servicesHeading": "Dịch vụ",
+    "portfolio": "Bộ sưu tập",
+    "pricing": "Bảng giá",
+    "clientStories": "Câu chuyện khách hàng",
+    "resourcesHeading": "Tài nguyên",
+    "blog": "Blog",
+    "guides": "Hướng dẫn & bài viết",
+    "helpCenter": "Trung tâm hỗ trợ",
+    "companyHeading": "Công ty",
+    "aboutUs": "Về chúng tôi",
+    "careers": "Tuyển dụng",
+    "mediaKit": "Media kit",
+    "bookHeading": "Đặt lịch chụp",
+    "bookSubtitle": "Bắt đầu miễn phí. Thêm cả đội ngũ khi bạn cần.",
+    "bookToday": "Đặt lịch ngay",
+    "languageLabel": "Tiếng Việt",
+    "terms": "Điều khoản & bảo mật",
+    "security": "Bảo mật",
+    "status": "Trạng thái",
+    "copyright": "Snapshot Hanoi LLC."
+  },
+  "AboutUs": {
+    "headline1": "Trước khi bạn",
+    "headline2": "chia sẻ",
+    "headline3": "câu chuyện.",
+    "studioName": "Snapshot Hanoi",
+    "bio0": "Chúng tôi là Trung và Vân, một đôi trong cuộc sống và nghệ thuật. Hành trình của chúng tôi bắt đầu trên những con phố sôi động của Hà Nội năm 2013, dẫn đến lời nguyện ước vào tháng 1 năm 2014. Từ năm 2012, chúng tôi đã dành cả cuộc đời để ghi lại tinh túy của tình yêu qua những đám cưới và elopement. Ngày nay, chúng tôi gọi Hà Nội là nhà, nơi chúng tôi được nuôi dưỡng bởi niềm vui của hai cô con gái Quỳnh Chi và Quỳnh Thy, trong khi công việc đưa chúng tôi khắp Việt Nam, châu Á và xa hơn nữa.",
+    "bio1": "Sau một thập kỷ khám phá mọi góc cạnh của thế giới nhiếp ảnh, chúng tôi nhận ra rằng trái tim mình đập nhanh nhất khi kể những câu chuyện của các cặp đôi. Chúng tôi không quan tâm đến sự hoàn hảo sắp đặt; thay vào đó, chúng tôi đam mê những cảm xúc thô sơ, chân thực — những lời thì thầm yên tĩnh, tiếng cười bất tận, và những cảm xúc đích thực tạo nên câu chuyện độc đáo của bạn. Phong cách của chúng tôi là sự kết hợp giữa không khí điện ảnh và sự thật tài liệu, được ghi lại qua ống kính vượt thời gian của hệ thống Leica M.",
+    "bio2": "Được công nhận trên toàn cầu về tầm nhìn, chúng tôi vinh dự được xếp hạng trong số những người xuất sắc nhất. Từ danh hiệu Nhiếp ảnh gia đám cưới xuất sắc nhất Việt Nam năm 2023 đến Top 20 Nhiếp ảnh gia đám cưới thế giới năm 2025, những giải thưởng này là minh chứng cho cam kết của chúng tôi với nghệ thuật kể chuyện.",
+    "awardsHeading": "Giải thưởng",
+    "awards": [
+      "Top 20 nhiếp ảnh gia đám cưới thế giới 2025",
+      "Top 2 nhiếp ảnh gia couple thế giới 2025",
+      "Top 50 nhiếp ảnh gia đám cưới thế giới 2024",
+      "Top 5 nhiếp ảnh gia couple thế giới 2024",
+      "Nhiếp ảnh gia đám cưới xuất sắc nhất Việt Nam 2023",
+      "Nhiếp ảnh gia đám cưới xuất sắc nhất Hà Nội 2023"
+    ],
+    "bookNow": "Đặt lịch ngay"
+  },
+  "ContactForm": {
+    "heading": "Liên hệ",
+    "nameLabel": "Tên của bạn",
+    "emailLabel": "Địa chỉ email của bạn",
+    "countryLabel": "Bạn đang ở đâu?",
+    "categoriesLabel": "Dịch vụ",
+    "pricePackageLabel": "Gói dịch vụ",
+    "howFoundLabel": "Bạn biết chúng tôi qua đâu?",
+    "budgetLabel": "Ngân sách nhiếp ảnh của bạn (vui lòng ghi rõ đơn vị tiền tệ)",
+    "storyLabel": "Hãy kể cho chúng tôi nghe về câu chuyện, sở thích và kế hoạch của bạn! (Chia sẻ bao nhiêu tùy thích)",
+    "submitLabel": "Gửi tin nhắn",
+    "successMessage": "Yêu cầu của bạn đã được gửi thành công! Vui lòng kiểm tra email để xác nhận.",
+    "contactDesc": "Chúng tôi rất muốn tìm hiểu về bạn và kế hoạch đám cưới của bạn! Vui lòng chia sẻ một số thông tin trong form liên hệ bên dưới và chúng tôi sẽ phản hồi sớm nhất. Hẹn gặp bạn!",
+    "officeLabel": "Văn phòng:",
+    "mailLabel": "Email:",
+    "whatsappLabel": "Whatsapp:"
+  },
+  "GalleriesMain": {
+    "heading": "Bộ sưu tập",
+    "keepOnLovin": "Tiếp tục yêu thương"
+  },
+  "Blogs": {
+    "heading": "Bài viết"
+  },
+  "BlogDetail": {
+    "backToBlogs": "Quay lại Blog",
+    "notFound": "Không tìm thấy bài viết.",
+    "prev": "Trước",
+    "next": "Tiếp"
+  },
+  "OrderConfirm": {
+    "invalidLink": "Liên kết không hợp lệ",
+    "invalidLinkDesc": "Liên kết xác nhận bị thiếu hoặc không hợp lệ. Vui lòng kiểm tra email và thử lại.",
+    "confirming": "Đang xác nhận đơn hàng",
+    "confirmingDesc": "Vui lòng đợi trong khi chúng tôi xác minh yêu cầu của bạn...",
+    "successTitle": "Xác nhận thành công!",
+    "successDesc": "Đơn hàng của bạn đã được xác nhận thành công. Chúng tôi sẽ sớm liên hệ với bạn.",
+    "errorTitle": "Xác nhận thất bại",
+    "errorDesc": "Đã xảy ra lỗi khi xác nhận đơn hàng. Vui lòng thử lại.",
+    "retry": "Thử lại"
+  },
+  "Packages": {
+    "heading": "Gói dịch vụ",
+    "bestFor": "Phù hợp cho",
+    "duration": "Thời lượng",
+    "minutes": "phút",
+    "numberOfPhotos": "Số lượng ảnh",
+    "editedPhotos": "ảnh đã chỉnh sửa",
+    "requestNow": "Yêu cầu ngay",
+    "note1": "Chi phí không bao gồm phí di chuyển đến các địa điểm xa, phương tiện đặc biệt như thuyền, hoặc vé vào cửa các điểm tham quan như Disney World, sở thú, di tích lịch sử, biệt thự, bảo tàng và cung điện.",
+    "note2": "Bảng giá này phản ánh các gói tiêu chuẩn của chúng tôi. Nếu bạn cần một gói phù hợp với nhu cầu riêng, hãy liên hệ với chúng tôi. Chúng tôi sẵn lòng cung cấp báo giá tùy chỉnh cho bạn.",
+    "note3": "Sau khi buổi chụp hoàn tất, chúng tôi sẽ giao ảnh đã chỉnh sửa qua thư viện ảnh trực tuyến được bảo mật bằng mật khẩu trong vòng 4 ngày làm việc.",
+    "note4": "Chúng tôi hiểu những kỷ niệm quan trọng như thế nào với bạn, vì vậy chúng tôi lưu trữ an toàn tất cả ảnh của bạn trong hai năm. Nếu bạn bị mất, chúng tôi sẽ hỗ trợ bạn lấy lại ảnh."
+  }
+}

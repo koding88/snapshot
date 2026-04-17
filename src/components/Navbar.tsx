@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePublicGalleries } from '@/hooks/useGalleries';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import {
   Instagram,
@@ -13,6 +14,10 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
+import { routing } from '@/i18n/routing';
+
+const GALLERIES_KEY = 'galleries';
 
 const PinterestIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="none">
@@ -34,6 +39,16 @@ const languages = [
   { code: 'zh', label: 'CN' },
 ];
 
+function replaceLocaleInPath(pathname: string, newLocale: string): string {
+  const segments = pathname.split('/');
+  // pathname starts with /locale/...
+  if (routing.locales.includes(segments[1] as 'en' | 'vi' | 'zh')) {
+    segments[1] = newLocale;
+    return segments.join('/');
+  }
+  return `/${newLocale}${pathname}`;
+}
+
 export default function Navbar({
   forceVisible: _forceVisible = false,
   manualHidden = false,
@@ -47,12 +62,21 @@ export default function Navbar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isGalleriesOpen, setIsGalleriesOpen] = useState(false);
   const [isGalleriesHovered, setIsGalleriesHovered] = useState(false);
-  const [currentLang, setCurrentLang] = useState('en');
   const [isLangOpen, setIsLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const currentLang = useLocale();
+  const t = useTranslations('Navbar');
+
+  const { data: galleriesData } = usePublicGalleries({ limit: 20 });
 
   const { scrollY } = useScroll();
   const pathname = usePathname();
+
+  const switchLocale = (code: string) => {
+    const newPath = replaceLocaleInPath(pathname, code);
+    window.location.assign(newPath);
+    setIsLangOpen(false);
+  };
 
   const isEditorial = pathname === '/' || pathname === '/contact';
 
@@ -70,23 +94,26 @@ export default function Navbar({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+
   const showSolid = scrolled || !isEditorial;
   const textColor = showSolid ? 'text-black' : 'text-white';
   const bgClass = showSolid ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent';
 
-  const menuItems = [
-    { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Galleries', href: '/galleries' },
-    { name: 'Blogs', href: '/blogs' },
-    { name: 'Contact', href: '/contact' },
-  ];
+  const galleryLinks = (galleriesData?.items ?? []).map((gallery) => ({
+    id: gallery.id,
+    name: gallery.name,
+    href: `/${currentLang}/galleries/${gallery.id}`,
+  }));
 
-  const galleryLinks = [
-    { name: 'Weddings', href: '/galleries/weddings' },
-    { name: 'Elopements - PreWedding', href: '/galleries/elopements' },
-    { name: 'Couples - Families', href: '/galleries/couples' },
-    { name: 'Films', href: '/galleries/films' },
+  const firstGalleryHref = galleryLinks.length > 0 ? galleryLinks[0].href : `/${currentLang}/galleries`;
+
+  const menuItems = [
+    { name: t('home'), href: `/${currentLang}`, key: 'home' },
+    { name: t('about'), href: `/${currentLang}/about`, key: 'about' },
+    { name: t('galleries'), href: firstGalleryHref, key: GALLERIES_KEY },
+    { name: t('packages'), href: `/${currentLang}/packages`, key: 'packages' },
+    { name: t('blogs'), href: `/${currentLang}/blogs`, key: 'blogs' },
+    { name: t('contact'), href: `/${currentLang}/contact`, key: 'contact' },
   ];
 
   return (
@@ -108,11 +135,12 @@ export default function Navbar({
           {/* Left: Logo */}
           <Link href="/" className="shrink-0">
             <Image
-              src="https://fixteamstudio.com/wp-content/uploads/2023/11/logo.png"
+              src="/logo-snapshot.svg"
               alt="Logo"
               width={200}
               height={200}
-              className={`h-14 w-auto transition-all ${showSolid ? 'invert' : ''}`}
+              unoptimized
+              className="h-14 w-auto transition-all"
               priority
             />
           </Link>
@@ -123,8 +151,8 @@ export default function Navbar({
               <div
                 key={item.name}
                 className="relative"
-                onMouseEnter={() => item.name === 'Galleries' && setIsGalleriesHovered(true)}
-                onMouseLeave={() => item.name === 'Galleries' && setIsGalleriesHovered(false)}
+                onMouseEnter={() => item.key === GALLERIES_KEY && setIsGalleriesHovered(true)}
+                onMouseLeave={() => item.key === GALLERIES_KEY && setIsGalleriesHovered(false)}
               >
                 <Link
                   href={item.href}
@@ -135,7 +163,7 @@ export default function Navbar({
                   {item.name}
                 </Link>
 
-                {item.name === 'Galleries' && (
+                {item.key === GALLERIES_KEY && (
                   <AnimatePresence>
                     {isGalleriesHovered && (
                       <motion.div
@@ -187,7 +215,7 @@ export default function Navbar({
               <button
                 type="button"
                 onClick={() => setIsLangOpen((prev) => !prev)}
-                className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 ${textColor}`}
+                className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 cursor-pointer ${textColor}`}
               >
                 <Globe size={14} />
                 <span>{languages.find((l) => l.code === currentLang)?.label}</span>
@@ -208,10 +236,9 @@ export default function Navbar({
                         key={lang.code}
                         type="button"
                         onClick={() => {
-                          setCurrentLang(lang.code);
-                          setIsLangOpen(false);
+                          switchLocale(lang.code);
                         }}
-                        className={`flex w-full px-4 py-2 text-left text-[12px] font-medium tracking-wider transition-colors hover:bg-gray-100 ${
+                        className={`flex w-full px-4 py-2 text-left text-[12px] font-medium tracking-wider transition-colors hover:bg-gray-100 cursor-pointer ${
                           currentLang === lang.code ? 'bg-gray-50 text-black' : 'text-gray-600'
                         }`}
                       >
@@ -227,7 +254,7 @@ export default function Navbar({
             <button
               onClick={() => setIsMenuOpen(true)}
               aria-label="Menu"
-              className={`md:hidden ${textColor}`}
+              className={`md:hidden cursor-pointer ${textColor}`}
             >
               <MenuIcon size={24} strokeWidth={1.2} />
             </button>
@@ -249,16 +276,17 @@ export default function Navbar({
               <div className="flex items-center justify-between">
                 <Link href="/" className="shrink-0" onClick={() => setIsMenuOpen(false)}>
                   <Image
-                    src="https://fixteamstudio.com/wp-content/uploads/2023/11/logo.png"
+                    src="/logo-snapshot.svg"
                     alt="Logo"
                     width={200}
                     height={200}
+                    unoptimized
                     className="h-12 w-auto invert"
                     priority
                   />
                 </Link>
 
-                <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu" className="text-black">
+                <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu" className="text-black cursor-pointer">
                   <X size={24} strokeWidth={1.3} />
                 </button>
               </div>
@@ -266,7 +294,7 @@ export default function Navbar({
               <div className="flex flex-1 flex-col overflow-hidden px-4 pt-12">
                 <div className="flex w-full gap-6">
                   <motion.span
-                    animate={{ height: isGalleriesOpen ? 420 : 210 }}
+                    animate={{ height: isGalleriesOpen ? 210 + galleryLinks.length * 52 : 210 }}
                     className="mt-1 block w-px bg-black/70"
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   />
@@ -290,7 +318,7 @@ export default function Navbar({
                             {item.name}
                           </Link>
 
-                          {item.name === 'Galleries' && (
+                          {item.key === GALLERIES_KEY && (
                             <button
                               type="button"
                               aria-label="Toggle galleries"
@@ -298,7 +326,7 @@ export default function Navbar({
                                 e.preventDefault();
                                 setIsGalleriesOpen((prev) => !prev);
                               }}
-                              className="pr-2 text-black/80 transition-opacity hover:text-black"
+                              className="pr-2 text-black/80 transition-opacity hover:text-black cursor-pointer"
                             >
                               {isGalleriesOpen ? <X size={18} strokeWidth={1.5} /> : <Plus size={18} strokeWidth={1.5} />}
                             </button>
@@ -306,7 +334,7 @@ export default function Navbar({
                         </div>
 
                         <AnimatePresence>
-                          {item.name === 'Galleries' && isGalleriesOpen && (
+                          {item.key === GALLERIES_KEY && isGalleriesOpen && (
                             <motion.div
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
@@ -354,8 +382,8 @@ export default function Navbar({
                       <button
                         key={lang.code}
                         type="button"
-                        onClick={() => setCurrentLang(lang.code)}
-                        className={`transition-opacity hover:opacity-70 ${currentLang === lang.code ? 'text-black' : 'text-black/50'}`}
+                        onClick={() => switchLocale(lang.code)}
+                        className={`transition-opacity hover:opacity-70 cursor-pointer ${currentLang === lang.code ? 'text-black' : 'text-black/50'}`}
                       >
                         {lang.label}
                       </button>

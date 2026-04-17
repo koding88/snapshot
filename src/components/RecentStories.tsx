@@ -2,36 +2,39 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
-const stories = [
-  {
-    title: 'Weddings',
-    image: 'https://fixteamstudio.com/wp-content/uploads/2024/01/J1021730-1.jpg',
-    imageClassName: 'object-cover object-center',
-    imageOffset: 'left-16 top-9',
-  },
-  {
-    title: 'Elopements - Prewed',
-    image: 'https://fixteamstudio.com/wp-content/uploads/2024/03/J1022791.jpg',
-    imageClassName: 'object-cover object-center',
-    imageOffset: 'left-16 top-8',
-  },
-  {
-    title: 'Couples - Families',
-    image: 'https://fixteamstudio.com/wp-content/uploads/2023/04/GTTR5835.jpg',
-    imageClassName: 'object-cover object-center',
-    imageOffset: 'left-16 top-9',
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export default function RecentStories() {
+  const t = useTranslations('RecentStories');
+
+  const stories = [
+    {
+      title: t('weddings'),
+      image: 'https://fixteamstudio.com/wp-content/uploads/2024/01/J1021730-1.jpg',
+      imageClassName: 'object-cover object-center',
+      imageOffset: 'left-16 top-9',
+    },
+    {
+      title: t('elopements'),
+      image: 'https://fixteamstudio.com/wp-content/uploads/2024/03/J1022791.jpg',
+      imageClassName: 'object-cover object-center',
+      imageOffset: 'left-16 top-8',
+    },
+    {
+      title: t('couples'),
+      image: 'https://fixteamstudio.com/wp-content/uploads/2023/04/GTTR5835.jpg',
+      imageClassName: 'object-cover object-center',
+      imageOffset: 'left-16 top-9',
+    },
+  ];
+
   return (
     <section className="bg-black px-8 pt-24 pb-40 text-white md:px-14 lg:px-16 xl:px-32 lg:pb-56 2xl:px-48">
       <div className="mx-auto max-w-[1780px]">
         <div className="flex items-center gap-8 lg:gap-10">
           <div className="h-px flex-1 bg-white/80" />
           <h2 className="shrink-0 font-serif text-[1rem] uppercase tracking-[0.36em] text-white/92 sm:text-[1.08rem]">
-            Our Recent Stories
+            {t('heading')}
           </h2>
           <div className="h-px flex-1 bg-white/80" />
         </div>

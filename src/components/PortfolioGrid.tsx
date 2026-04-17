@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function PortfolioGrid() {
+  const t = useTranslations('PortfolioGrid');
   return (
     <section className="relative -mt-20 overflow-visible text-white md:-mt-24 lg:-mt-36 xl:-mt-44">
       <div className="absolute inset-x-0 bottom-0 top-[24%] bg-black" />
@@ -41,16 +43,16 @@ export default function PortfolioGrid() {
           <div className="ml-auto w-full max-w-[850px]">
             <h2 className="text-center font-serif text-[2.80rem] font-normal uppercase leading-[1.15] tracking-[-0.02em] text-white sm:text-[3.6rem] md:text-[4rem] lg:text-left lg:text-[4.9rem] lg:leading-[1.02] lg:tracking-[-0.03em] xl:text-[5.4rem]">
               <span className="lg:hidden">
-                The Ones
+                {t('titleMobile1')}
                 <br />
-                Behind The
+                {t('titleMobile2')}
                 <br />
-                Camera
+                {t('titleMobile3')}
               </span>
               <span className="hidden lg:block">
-                The Ones Behind
+                {t('titleDesktop1')}
                 <br />
-                The Camera
+                {t('titleDesktop2')}
               </span>
             </h2>
 
@@ -61,15 +63,11 @@ export default function PortfolioGrid() {
 
               <div className="max-w-[720px] lg:-ml-1">
                 <p className="font-sans text-[1.05rem] leading-[1.7] text-white/88 italic sm:text-[1.15rem] md:text-[1.28rem]">
-                  We&apos;re Trung and Vân a Vietnam elopement and intimate wedding photographer
+                  {t('intro')}
                 </p>
 
                 <p className="mt-16 font-serif text-[1.02rem] leading-[1.85] font-semibold text-white sm:text-[1.12rem] md:text-[1.22rem]">
-                  The beautiful lands of Viet Nam, as well as many other destinations are the playground where we love to
-                  document engagements, weddings, elopements. No matter where your destination is, we will reach you to
-                  document your wedding. We will tell your story through emotional visual language. We will be there to
-                  capture your rawest feelings, all the unique moments between you both, setting them in the beauty of the
-                  surrounding landscapes. Do you feel like discovering more?
+                  {t('body')}
                 </p>
               </div>
             </div>
@@ -80,9 +78,9 @@ export default function PortfolioGrid() {
               <motion.button
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.99 }}
-                className="min-w-[320px] bg-[#c8b8ab] px-14 py-5 text-center font-serif text-[0.95rem] uppercase tracking-[0.34em] text-white shadow-xl transition-colors duration-300 hover:bg-[#d6c7bb]"
+                className="min-w-[320px] bg-[#c8b8ab] px-14 py-5 text-center font-serif text-[0.95rem] uppercase tracking-[0.34em] text-white shadow-xl transition-colors duration-300 hover:bg-[#d6c7bb] cursor-pointer"
               >
-                Read More
+                {t('readMore')}
               </motion.button>
             </Link>
           </div>

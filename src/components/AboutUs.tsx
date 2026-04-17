@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function AboutUs() {
+  const t = useTranslations('AboutUs');
+  const locale = useLocale();
   return (
     <section className="relative min-h-screen bg-black text-white selection:bg-white/20">
       <div className="mx-auto max-w-[1780px] px-8 py-24 md:px-14 lg:px-20 lg:py-32 xl:px-24">
@@ -18,7 +21,7 @@ export default function AboutUs() {
                 viewport={{ once: false }}
                 transition={{ duration: 1, delay: 0.1 }}
               >
-                Before you
+                {t('headline1')}
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -26,7 +29,7 @@ export default function AboutUs() {
                 viewport={{ once: false }}
                 transition={{ duration: 1, delay: 0.3 }}
               >
-                share your
+                {t('headline2')}
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -35,7 +38,7 @@ export default function AboutUs() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="pl-32 text-right"
               >
-                story.
+                {t('headline3')}
               </motion.div>
             </div>
           </div>
@@ -51,7 +54,7 @@ export default function AboutUs() {
                 className="font-serif tracking-[0.25em] text-[clamp(1.1rem,2.5vw,1.6rem)] uppercase font-bold text-white leading-none whitespace-nowrap"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                Fixteam Studio
+                {t('studioName')}
               </h2>
             </motion.div>
           </div>
@@ -105,17 +108,10 @@ export default function AboutUs() {
                 className="font-serif text-[2rem] md:text-[2.5rem] mb-6 font-normal"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                Awards
+                {t('awardsHeading')}
               </motion.h2>
               <ul className="space-y-3 font-light text-[0.95rem] md:text-[1.05rem] opacity-80 list-disc list-inside">
-                {[
-                  "Top 20 wedding photographer on the world 2025",
-                  "Top 2 couple photographer on the worl 2025",
-                  "Top 50 wedding photographer on the world 2024",
-                  "Top 5 couple photographer on the world 2024",
-                  "The best wedding photographer in Vietnam 2023",
-                  "The best wedding photographer in Hanoi 2023"
-                ].map((award, index) => (
+                {(t.raw('awards') as string[]).map((award, index) => (
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, x: -10 }}
@@ -137,11 +133,11 @@ export default function AboutUs() {
               className="mt-16"
             >
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="font-serif text-[1.1rem] tracking-[0.3em] uppercase border-b border-white pb-1 hover:opacity-70 transition-opacity"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                Book Now
+                {t('bookNow')}
               </Link>
             </motion.div>
           </div>

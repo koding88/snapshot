@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import GalleryLightbox from './GalleryLightbox';
+import { useTranslations } from 'next-intl';
 
 type PhotoCardProps = {
   src: string;
@@ -63,24 +64,13 @@ function PhotoCard({ src, alt, caption, grayscale = false, onClick, bleedDirecti
 export default function FeaturedPhotography() {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const t = useTranslations('FeaturedPhotography');
 
   const featuredPhotos = [
-    {
-      src: "https://fixteamstudio.com/wp-content/uploads/2026/03/J9833347-scaled.jpg",
-      title: "Huy & Diane | Love in Hanoi",
-    },
-    {
-      src: "https://fixteamstudio.com/wp-content/uploads/2026/01/J1082603.jpg",
-      title: "Slow dance | Midnight vows",
-    },
-    {
-      src: "https://fixteamstudio.com/wp-content/uploads/2026/03/J1120631.jpg",
-      title: "Intimate wedding | Thai & Linh",
-    },
-    {
-      src: "https://fixteamstudio.com/wp-content/uploads/2025/12/J1073080-1.jpg",
-      title: "Editorial elopement | Quiet frames",
-    }
+    { src: "https://fixteamstudio.com/wp-content/uploads/2026/03/J9833347-scaled.jpg", title: t('photo0') },
+    { src: "https://fixteamstudio.com/wp-content/uploads/2026/01/J1082603.jpg", title: t('photo1') },
+    { src: "https://fixteamstudio.com/wp-content/uploads/2026/03/J1120631.jpg", title: t('photo2') },
+    { src: "https://fixteamstudio.com/wp-content/uploads/2025/12/J1073080-1.jpg", title: t('photo3') },
   ];
 
   const openLightbox = (index: number) => {
@@ -115,15 +105,15 @@ export default function FeaturedPhotography() {
                 letterSpacing: '-0.02em',
               }}
             >
-              <span className="block lg:inline">Featured</span>
+              <span className="block lg:inline">{t('titleLine1')}</span>
               <br className="lg:hidden" />
-              <span className="lg:ml-3">Wedding &</span>
+              <span className="lg:ml-3">{t('titleLine2')}</span>
               <br className="lg:hidden" />
               <span className="block lg:inline lg:ml-0">
-                Elopement
+                {t('titleLine3')}
               </span>
               <br />
-              <span className="block lg:mt-0 lg:inline">Photography</span>
+              <span className="block lg:mt-0 lg:inline">{t('titleLine4')}</span>
             </h2>
           </motion.div>
         </div>
@@ -187,9 +177,9 @@ export default function FeaturedPhotography() {
             <motion.button
               whileHover={{ backgroundColor: '#d1c1b7', y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="min-w-[240px] bg-[#c1b1a7] px-14 py-5 text-center font-serif text-[0.85rem] font-bold uppercase tracking-[0.5em] text-white transition-all duration-500"
+              className="min-w-[240px] bg-[#c1b1a7] px-14 py-5 text-center font-serif text-[0.85rem] font-bold uppercase tracking-[0.5em] text-white transition-all duration-500 cursor-pointer"
             >
-              View More
+              {t('viewMore')}
             </motion.button>
           </Link>
         </motion.div>

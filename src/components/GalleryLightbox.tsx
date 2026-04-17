@@ -60,7 +60,7 @@ function LightboxContent({
           }}
           animate="visible"
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 p-8 flex justify-between items-start md:mt-[480px] px-8 md:px-20 w-full"
+          className="relative z-10 p-8 flex justify-between items-start md:mt-[70px] px-8 md:px-20 w-full"
         >
           <button
             onClick={onClose}
@@ -100,6 +100,7 @@ function LightboxContent({
               src={currentImage.src}
               alt={currentImage.title}
               fill
+              unoptimized
               className="object-contain"
               priority
             />
@@ -136,39 +137,8 @@ function LightboxContent({
             </div>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mt-28 max-w-[1000px] text-center text-white/90 font-sans font-light leading-[2.2] flex flex-col gap-10 text-[1.1rem] md:text-[1.2rem] px-4 md:px-0 tracking-wide"
-          >
-            <p className="italic">
-              Every film we create is an intimate visual journey, where the stillness of photography meets the rhythm of cinema. Our goal is to preserve the raw, unscripted emotions of your story in their purest form &mdash; timeless, elegant, and deeply personal.
-            </p>
-          </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mt-32 w-full max-w-[1000px] flex flex-col items-center gap-12"
-          >
-            <p className="text-[1rem] md:text-[1.1rem] text-white/80 font-sans font-light tracking-wide text-center">
-              A wonderful day spent together in the romantic autumn of Hanoi &mdash; filled with love, tenderness, and warmth.
-            </p>
-            
-            <div className="relative w-full aspect-video group overflow-hidden shadow-2xl">
-              <iframe 
-                src="https://player.vimeo.com/video/819273766?h=a151b3d5c5&title=0&byline=0&portrait=0" 
-                className="absolute inset-0 w-full h-full"
-                frameBorder="0" 
-                allow="autoplay; fullscreen; picture-in-picture" 
-                allowFullScreen
-              ></iframe>
-            </div>
-          </motion.div>
+       
 
           <div className="mt-24 w-full max-w-[1400px] flex flex-col gap-4 lg:gap-8 mb-20 px-4 lg:px-0">
             <motion.div 
@@ -179,10 +149,10 @@ function LightboxContent({
               className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8"
             >
               <div className="relative aspect-[3/4] md:aspect-square w-full group overflow-hidden">
-                <Image src={images[(currentIndex + 1) % images.length]?.src || currentImage.src} alt="Detail" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={images[(currentIndex + 1) % images.length]?.src || currentImage.src} alt="Detail" fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="relative aspect-[3/4] md:aspect-square w-full group overflow-hidden">
-                <Image src={images[(currentIndex + 2) % images.length]?.src || currentImage.src} alt="Detail" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={images[(currentIndex + 2) % images.length]?.src || currentImage.src} alt="Detail" fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
             </motion.div>
 
@@ -194,13 +164,13 @@ function LightboxContent({
               className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8"
             >
               <div className="relative aspect-[4/3] w-full group overflow-hidden">
-                <Image src={images[(currentIndex + 3) % images.length]?.src || currentImage.src} alt="Detail" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={images[(currentIndex + 3) % images.length]?.src || currentImage.src} alt="Detail" fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="relative aspect-[4/3] w-full group overflow-hidden">
-                <Image src={images[(currentIndex + 4) % images.length]?.src || currentImage.src} alt="Detail" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={images[(currentIndex + 4) % images.length]?.src || currentImage.src} alt="Detail" fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
               <div className="relative aspect-[4/3] w-full group overflow-hidden">
-                <Image src={images[(currentIndex + 5) % images.length]?.src || currentImage.src} alt="Detail" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={images[(currentIndex + 5) % images.length]?.src || currentImage.src} alt="Detail" fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
             </motion.div>
             
@@ -211,7 +181,7 @@ function LightboxContent({
               transition={{ duration: 0.8, delay: 0.4 }}
               className="relative aspect-[16/9] md:aspect-[21/9] w-full group overflow-hidden"
             >
-              <Image src={images[(currentIndex + 6) % images.length]?.src || currentImage.src} alt="Detail" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src={images[(currentIndex + 6) % images.length]?.src || currentImage.src} alt="Detail" fill unoptimized className="object-cover transition-transform duration-700 group-hover:scale-105" />
             </motion.div>
           </div>
 

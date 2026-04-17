@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion';
 import { Instagram } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function InstagramFollow() {
+  const t = useTranslations('InstagramFollow');
   return (
     <section className="bg-black px-8 py-20 text-white md:px-14 lg:px-24 lg:py-24 xl:px-32">
       <div className="mx-auto max-w-[1680px]">
@@ -23,7 +25,7 @@ export default function InstagramFollow() {
           >
             <Instagram size={24} strokeWidth={1.7} />
             <span className="font-serif text-[1rem] tracking-[0.34em]">
-              Follow us on instagram
+              {t('cta')}
             </span>
           </Link>
         </motion.div>

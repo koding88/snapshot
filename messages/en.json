@@ -1,0 +1,178 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "about": "About Us",
+    "galleries": "Galleries",
+    "packages": "Packages",
+    "blogs": "Blogs",
+    "contact": "Contact",
+    "weddings": "Weddings",
+    "elopements": "Elopements - PreWedding",
+    "couples": "Couples - Families",
+    "films": "Films"
+  },
+  "HeroSlider": {
+    "of": "of",
+    "imageAlt": "Cinematic Background"
+  },
+  "CinematicStory": {
+    "titleLine1": "CINEMATIC",
+    "titleLine2": "LOVE",
+    "titleLine3": "STORIES",
+    "titleDesktop1": "Cinematic",
+    "titleDesktop2": "Love Stories",
+    "quote1": "We adore quiet,",
+    "quote2": "minimalistic and esthetic photography,",
+    "quote3": "that feels like scenes from a film."
+  },
+  "PortfolioGrid": {
+    "titleMobile1": "The Ones",
+    "titleMobile2": "Behind The",
+    "titleMobile3": "Camera",
+    "titleDesktop1": "The Ones Behind",
+    "titleDesktop2": "The Camera",
+    "intro": "We're Trung and Vân a Vietnam elopement and intimate wedding photographer",
+    "body": "The beautiful lands of Viet Nam, as well as many other destinations are the playground where we love to document engagements, weddings, elopements. No matter where your destination is, we will reach you to document your wedding. We will tell your story through emotional visual language. We will be there to capture your rawest feelings, all the unique moments between you both, setting them in the beauty of the surrounding landscapes. Do you feel like discovering more?",
+    "readMore": "Read More"
+  },
+  "RecentStories": {
+    "heading": "Our Recent Stories",
+    "weddings": "Weddings",
+    "elopements": "Elopements - Prewed",
+    "couples": "Couples - Families"
+  },
+  "FeaturedPhotography": {
+    "titleLine1": "Featured",
+    "titleLine2": "Wedding &",
+    "titleLine3": "Elopement",
+    "titleLine4": "Photography",
+    "photo0": "Huy & Diane | Love in Hanoi",
+    "photo1": "Slow dance | Midnight vows",
+    "photo2": "Intimate wedding | Thai & Linh",
+    "photo3": "Editorial elopement | Quiet frames",
+    "viewMore": "View More"
+  },
+  "NiceWords": {
+    "testimonials": [
+      {
+        "category": "Nice words",
+        "quote": "We simply fell in love with this shoot! It turned out incredibly romantic and memorable. The photographer created a cozy atmosphere and helped us relax in front of the camera. Every photo conveys our emotions and love story. Thank you so much!",
+        "author": "MARK & ANNA"
+      },
+      {
+        "category": "Magical Day",
+        "quote": "A truly magical experience. Snapshot Hanoi captured every silent glance and every loud laugh. Our wedding album feels like a piece of art that we will cherish forever. Professionalism at its finest in the heart of Hanoi.",
+        "author": "HUY & DIANE"
+      },
+      {
+        "category": "Elopement",
+        "quote": "Fixing our moments in Vietnam was the best decision. The team made us feel so comfortable, and the final results exceeded all our expectations. Timeless, elegant, and raw—exactly what we dreamed of.",
+        "author": "SANDRA & OLIVIER"
+      },
+      {
+        "category": "Family",
+        "quote": "Incredible attention to detail. They didn't just take photos; they told our story through their lens. The atmosphere was intimate and the memories they preserved are priceless for our family.",
+        "author": "SILKY & RON"
+      }
+    ]
+  },
+  "InstagramFollow": {
+    "cta": "Follow us on instagram"
+  },
+  "Footer": {
+    "tagline": "Snapshot Hanoi was created for the new ways we live and work. We make beautiful photography around the world.",
+    "servicesHeading": "Services",
+    "portfolio": "Portfolio",
+    "pricing": "Pricing",
+    "clientStories": "Client stories",
+    "resourcesHeading": "Resources",
+    "blog": "Blog",
+    "guides": "Guides & tutorials",
+    "helpCenter": "Help center",
+    "companyHeading": "Company",
+    "aboutUs": "About us",
+    "careers": "Careers",
+    "mediaKit": "Media kit",
+    "bookHeading": "Book a Session",
+    "bookSubtitle": "Get started for free. Add your whole team as your needs grow.",
+    "bookToday": "Book today",
+    "languageLabel": "English",
+    "terms": "Terms & privacy",
+    "security": "Security",
+    "status": "Status",
+    "copyright": "Snapshot Hanoi LLC."
+  },
+  "AboutUs": {
+    "headline1": "Before you",
+    "headline2": "share your",
+    "headline3": "story.",
+    "studioName": "Snapshot Hanoi",
+    "bio0": "We are Trung and Vân, a duo in life and art. Our journey together began in the vibrant streets of Hanoi in 2013, leading us to say \"I do\" just a year later in January 2014. Since 2012, we have dedicated our lives to capturing the essence of love through weddings and elopements. Today, we call Hanoi home, where we are raised by the joy of our two daughters, Quynh Chi and Quynh Thy, while our work takes us across Vietnam, Asia, and far beyond.",
+    "bio1": "After a decade of exploring every corner of the photographic world, we discovered that our hearts beat fastest when telling the stories of couples. We are not interested in staged perfection; instead, we are passionate about raw, honest emotions—the quiet whispers, the unbridled laughter, and the authentic feelings that make your story unique. Our style is a fusion of cinematic atmosphere and documentary truth, captured through the timeless lens of the Leica M system.",
+    "bio2": "Recognized globally for our vision, we are honored to have been ranked among the elite. From being named the Best Wedding Photographer in Vietnam in 2023 to reaching the Top 20 Wedding Photographers in the World in 2025, these accolades are a testament to our commitment to the art of storytelling.",
+    "awardsHeading": "Awards",
+    "awards": [
+      "Top 20 wedding photographer in the world 2025",
+      "Top 2 couple photographer in the world 2025",
+      "Top 50 wedding photographer in the world 2024",
+      "Top 5 couple photographer in the world 2024",
+      "The best wedding photographer in Vietnam 2023",
+      "The best wedding photographer in Hanoi 2023"
+    ],
+    "bookNow": "Book Now"
+  },
+  "ContactForm": {
+    "heading": "Contact",
+    "nameLabel": "Your Name",
+    "emailLabel": "Your Email address",
+    "countryLabel": "Where are you based?",
+    "categoriesLabel": "Categories",
+    "pricePackageLabel": "Price Package",
+    "howFoundLabel": "How did you find Us?",
+    "budgetLabel": "Your photography budget (please specify the currency)",
+    "storyLabel": "Tell us all about your story, your interests and your plans! (Share as much info as you like!)",
+    "submitLabel": "Send Message",
+    "successMessage": "Your request has been sent successfully! Please check your email to confirm.",
+    "contactDesc": "We\u2019d love to find out all about you and your wedding plans! Please share some details in the contact form below and we\u2019ll get back to you with some more information. We can\u2019t wait to chat more!",
+    "officeLabel": "Office:",
+    "mailLabel": "Mail:",
+    "whatsappLabel": "Whatsapp:"
+  },
+  "GalleriesMain": {
+    "heading": "Galleries",
+    "keepOnLovin": "Keep on Lovin"
+  },
+  "Blogs": {
+    "heading": "Blogs"
+  },
+  "BlogDetail": {
+    "backToBlogs": "Back to Blogs",
+    "notFound": "Blog not found.",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "OrderConfirm": {
+    "invalidLink": "Invalid Confirmation Link",
+    "invalidLinkDesc": "The confirmation link is missing or invalid. Please check your email and try again.",
+    "confirming": "Confirming Your Order",
+    "confirmingDesc": "Please wait while we verify your request...",
+    "successTitle": "Order Confirmed!",
+    "successDesc": "Your order has been successfully confirmed. We will get in touch with you shortly.",
+    "errorTitle": "Confirmation Failed",
+    "errorDesc": "Something went wrong while confirming your order. Please try again.",
+    "retry": "Try Again"
+  },
+  "Packages": {
+    "heading": "Packages",
+    "bestFor": "Best For",
+    "duration": "Duration",
+    "minutes": "minutes",
+    "numberOfPhotos": "Number of Photos",
+    "editedPhotos": "edited photos",
+    "requestNow": "Request Now",
+    "note1": "The cost does not cover travel expenses for remote locations, special transportation such as boat rides, or entry fees to attractions like Disney World, zoos, historical sites, villas, museums, and palaces.",
+    "note2": "This pricing list reflects our standard packages. If you're looking for something tailored to your specific needs, feel free to contact us. We're happy to provide you with a custom quote that fits your unique requirements.",
+    "note3": "Once your photoshoot is completed, we will deliver your edited images through a password-protected online gallery within 4 business days.",
+    "note4": "We understand how important your memories are, which is why we securely store all of your images for two years. If you ever lose them, we'll be here to help you retrieve your photos."
+  }
+}
