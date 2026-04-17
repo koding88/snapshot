@@ -9,7 +9,9 @@ import type {
 
 export const blogsApi = {
   getPublic: (params?: PaginationParams) =>
-    apiClient<ApiResponse<PaginatedData<BlogListItem>>>('/api/v1/blogs/public', { params }),
+    apiClient<ApiResponse<PaginatedData<BlogListItem>>>('/api/v1/blogs/public', {
+      params: params ? { ...params } : undefined,
+    }),
 
   getPublicById: (id: string) =>
     apiClient<ApiResponse<BlogDetail>>(`/api/v1/blogs/public/${id}`),

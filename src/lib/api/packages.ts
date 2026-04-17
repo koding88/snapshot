@@ -3,5 +3,7 @@ import type { ApiResponse, PaginatedData, PaginationParams, Package } from '@/ty
 
 export const packagesApi = {
   getPublic: (params?: PaginationParams) =>
-    apiClient<ApiResponse<PaginatedData<Package>>>('/api/v1/packages/public', { params }),
+    apiClient<ApiResponse<PaginatedData<Package>>>('/api/v1/packages/public', {
+      params: params ? { ...params } : undefined,
+    }),
 };

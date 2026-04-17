@@ -13,7 +13,9 @@ interface GetProjectsParams extends PaginationParams {
 
 export const projectsApi = {
   getPublic: (params: GetProjectsParams) =>
-    apiClient<ApiResponse<PaginatedData<ProjectListItem>>>('/api/v1/projects/public', { params }),
+    apiClient<ApiResponse<PaginatedData<ProjectListItem>>>('/api/v1/projects/public', {
+      params: params ? { ...params } : undefined,
+    }),
 
   getPublicById: (id: string) =>
     apiClient<ApiResponse<ProjectDetail>>(`/api/v1/projects/public/${id}`),
