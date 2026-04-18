@@ -34,9 +34,9 @@ const MenuIcon = ({ size = 24, strokeWidth = 1.2 }) => (
 );
 
 const languages = [
-  { code: 'en', label: 'EN' },
-  { code: 'vi', label: 'VN' },
-  { code: 'zh', label: 'CN' },
+  { code: 'en', label: 'English' },
+  { code: 'vi', label: 'Vietnamese' },
+  { code: 'zh', label: 'Chinese' },
 ];
 
 function replaceLocaleInPath(pathname: string, newLocale: string): string {
@@ -137,10 +137,10 @@ export default function Navbar({
             <Image
               src="/logo-snapshot.svg"
               alt="Logo"
-              width={200}
-              height={200}
+              width={260}
+              height={260}
               unoptimized
-              className="h-14 w-auto transition-all"
+              className="h-20 w-auto transition-all"
               priority
             />
           </Link>
@@ -196,14 +196,17 @@ export default function Navbar({
           <div className="flex items-center gap-5">
             {/* Social icons - desktop only */}
             <div className={`hidden items-center gap-4 md:flex ${textColor}`}>
-              <Link href="#" className="transition-opacity hover:opacity-60">
+              <Link href="https://www.facebook.com/" className="transition-opacity hover:opacity-60" target="_blank" rel="noopener noreferrer">
                 <Facebook size={16} strokeWidth={1.2} />
               </Link>
-              <Link href="#" className="transition-opacity hover:opacity-60">
+              <Link href="https://www.pinterest.com/Snaphanoi/" className="transition-opacity hover:opacity-60" target="_blank" rel="noopener noreferrer">
                 <PinterestIcon size={16} />
               </Link>
-              <Link href="#" className="transition-opacity hover:opacity-60">
+              <Link href="https://www.instagram.com/snaphanoi.photo/" className="transition-opacity hover:opacity-60" target="_blank" rel="noopener noreferrer">
                 <Instagram size={16} strokeWidth={1.2} />
+              </Link>
+              <Link href="https://wa.me/84944659659" className="transition-opacity hover:opacity-60" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3.2c-7.064 0-12.8 5.736-12.8 12.8 0 2.264.6 4.472 1.736 6.408l-1.832 6.696a1.6 1.6 0 0 0 1.96 1.96l6.696-1.832a12.74 12.74 0 0 0 6.24 1.624h.008c7.064 0 12.8-5.736 12.8-12.8s-5.736-12.8-12.8-12.8zm0 23.2a10.4 10.4 0 0 1-5.36-1.504l-.384-.224-5.008 1.368 1.368-5.008-.224-.384a10.4 10.4 0 1 1 9.608 5.752zm5.68-7.36c-.312-.156-1.848-.912-2.136-1.016-.288-.104-.496-.156-.704.156-.208.312-.808 1.016-.992 1.224-.184.208-.368.232-.68.08-.312-.156-1.32-.488-2.512-1.552-.928-.824-1.552-1.84-1.736-2.152-.184-.312-.02-.48.136-.632.14-.14.312-.368.468-.552.156-.184.208-.312.312-.52.104-.208.052-.392-.024-.552-.08-.156-.704-1.704-.968-2.336-.256-.616-.52-.528-.704-.536-.184-.008-.392-.008-.6-.008-.208 0-.552.08-.84.392-.288.312-1.104 1.08-1.104 2.632 0 1.552 1.128 3.048 1.288 3.256.156.208 2.224 3.4 5.392 4.632.756.324 1.344.52 1.808.664.76.24 1.456.208 2.008.128.616-.092 1.848-.752 2.112-1.48.264-.728.264-1.352.184-1.48-.08-.128-.288-.208-.6-.36z"/></svg>
               </Link>
             </div>
 
@@ -367,14 +370,17 @@ export default function Navbar({
               <div className="mx-2 mt-auto border-t border-black/60 pt-6 pb-4">
                 <div className="flex items-center justify-between px-2 text-black">
                   <div className="flex items-center gap-6">
-                    <Link href="#" className="transition-opacity hover:opacity-70">
+                    <Link href="https://www.facebook.com/" className="transition-opacity hover:opacity-70" target="_blank" rel="noopener noreferrer">
                       <Facebook size={20} strokeWidth={1.5} />
                     </Link>
-                    <Link href="#" className="transition-opacity hover:opacity-70">
+                    <Link href="https://www.pinterest.com/Snaphanoi/" className="transition-opacity hover:opacity-70" target="_blank" rel="noopener noreferrer">
                       <PinterestIcon size={20} />
                     </Link>
-                    <Link href="#" className="transition-opacity hover:opacity-70">
+                    <Link href="https://www.instagram.com/snaphanoi.photo/" className="transition-opacity hover:opacity-70" target="_blank" rel="noopener noreferrer">
                       <Instagram size={20} strokeWidth={1.5} />
+                    </Link>
+                    <Link href="https://wa.me/84944659659" className="transition-opacity hover:opacity-70" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                      <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3.2c-7.064 0-12.8 5.736-12.8 12.8 0 2.264.6 4.472 1.736 6.408l-1.832 6.696a1.6 1.6 0 0 0 1.96 1.96l6.696-1.832a12.74 12.74 0 0 0 6.24 1.624h.008c7.064 0 12.8-5.736 12.8-12.8s-5.736-12.8-12.8-12.8zm0 23.2a10.4 10.4 0 0 1-5.36-1.504l-.384-.224-5.008 1.368 1.368-5.008-.224-.384a10.4 10.4 0 1 1 9.608 5.752zm5.68-7.36c-.312-.156-1.848-.912-2.136-1.016-.288-.104-.496-.156-.704.156-.208.312-.808 1.016-.992 1.224-.184.208-.368.232-.68.08-.312-.156-1.32-.488-2.512-1.552-.928-.824-1.552-1.84-1.736-2.152-.184-.312-.02-.48.136-.632.14-.14.312-.368.468-.552.156-.184.208-.312.312-.52.104-.208.052-.392-.024-.552-.08-.156-.704-1.704-.968-2.336-.256-.616-.52-.528-.704-.536-.184-.008-.392-.008-.6-.008-.208 0-.552.08-.84.392-.288.312-1.104 1.08-1.104 2.632 0 1.552 1.128 3.048 1.288 3.256.156.208 2.224 3.4 5.392 4.632.756.324 1.344.52 1.808.664.76.24 1.456.208 2.008.128.616-.092 1.848-.752 2.112-1.48.264-.728.264-1.352.184-1.48-.08-.128-.288-.208-.6-.36z"/></svg>
                     </Link>
                   </div>
                   <div className="flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-wider">

@@ -255,10 +255,10 @@ export default function BlogDetailContent() {
 
             <div className="flex-2 flex justify-center text-center px-10">
               <h3
-                className="font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-none text-white font-normal whitespace-nowrap tracking-wide"
+                className="font-serif text-[clamp(1rem,2vw,1.2rem)] leading-none text-white font-normal text-wrap tracking-wide"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                {blog.name}
+                {blog.name}m
               </h3>
             </div>
 

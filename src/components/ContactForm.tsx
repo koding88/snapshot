@@ -15,7 +15,14 @@ const countries = Object.entries(COUNTRY_NAME_TO_CODE)
   .map(([name, code]) => ({ code, name: name.replace(/\b\w/g, l => l.toUpperCase()) }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-const howDidYouFindOptions = ['Search', 'Social media', 'Ads', 'Friends', 'Other'];
+export const ORDER_DISCOVERY_SOURCES = [
+  'instagram',
+  'facebook',
+  'tiktok',
+  'google',
+  'friend',
+  'other',
+] as const;
 
 
 export default function ContactForm() {
@@ -31,6 +38,8 @@ export default function ContactForm() {
   const [story, setStory] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { data: galleriesData } = usePublicGalleries({ limit: 50 });
   const { data: packagesData } = usePublicPackages({ limit: 50 });
@@ -55,8 +64,30 @@ export default function ContactForm() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
     const email = `${emailPrefix}@gmail.com`;
-
+    const newErrors: { [key: string]: string } = {};
+    // Validate required fields
+    if (!name) newErrors.name = 'Name is required';
+    if (!emailPrefix) newErrors.email = 'Email is required';
+    // Validate emailPrefix (only allow a-z, 0-9, dot, underscore, min 3 chars)
+    if (emailPrefix && !/^[a-zA-Z0-9._%+-]{3,}$/.test(emailPrefix)) {
+      newErrors.email = 'Email format is invalid';
+    }
+    if (!countryCode) newErrors.countryCode = 'Country is required';
+    if (!galleryId) newErrors.galleryId = 'Category is required';
+    if (!packageId) newErrors.packageId = 'Package is required';
+    if (!phoneNumber) newErrors.phoneNumber = 'Phone number is required';
+    // Validate phone number (digits, +, -, space, min 8 chars)
+    if (phoneNumber && !/^[+\d][\d\s\-]{7,}$/.test(phoneNumber)) {
+      newErrors.phoneNumber = 'Phone number format is invalid';
+    }
+    if (!howFound) newErrors.discoverySource = 'Discovery source is required';
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
     requestOrder(
       {
         name,
@@ -78,6 +109,15 @@ export default function ContactForm() {
           setPackageId('');
           setHowFound('');
           setStory('');
+        },
+        onError: (error: any) => {
+          let message = 'An error occurred. Please try again.';
+          if (error?.response?.data?.message) {
+            message = error.response.data.message;
+          } else if (error?.message) {
+            message = error.message;
+          }
+          setErrorMessage(message);
         },
       },
     );
@@ -111,6 +151,12 @@ export default function ContactForm() {
             transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-9"
           >
+            {/* Error message (API or global) */}
+            {errorMessage && (
+              <div className="rounded-md border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400 mb-2">
+                {errorMessage}
+              </div>
+            )}
             {submitted && (
               <div className="rounded-md border border-green-500/50 bg-green-500/10 px-4 py-3 text-sm text-green-400">
                 {t('successMessage')}
@@ -128,6 +174,7 @@ export default function ContactForm() {
                 onChange={(e) => setName(e.target.value)}
                 className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.5rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
               />
+              {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
             </div>
 
             {/* Email with @gmail.com suffix */}
@@ -146,6 +193,7 @@ export default function ContactForm() {
                   @gmail.com
                 </span>
               </div>
+              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
             </div>
 
             {/* Where are you based? - Country select */}
@@ -167,6 +215,7 @@ export default function ContactForm() {
                   ▼
                 </span>
               </div>
+              {errors.countryCode && <p className="text-red-400 text-xs mt-1">{errors.countryCode}</p>}
             </div>
 
             {/* Categories (Gallery) */}
@@ -188,6 +237,7 @@ export default function ContactForm() {
                   ▼
                 </span>
               </div>
+              {errors.galleryId && <p className="text-red-400 text-xs mt-1">{errors.galleryId}</p>}
             </div>
 
             {/* Price / Package */}
@@ -211,6 +261,7 @@ export default function ContactForm() {
                   ▼
                 </span>
               </div>
+              {errors.packageId && <p className="text-red-400 text-xs mt-1">{errors.packageId}</p>}
             </div>
 
             {/* Phone Number */}
@@ -224,6 +275,7 @@ export default function ContactForm() {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.5rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
               />
+              {errors.phoneNumber && <p className="text-red-400 text-xs mt-1">{errors.phoneNumber}</p>}
             </div>
 
             {/* How did you find Us? - Dropdown */}
@@ -237,14 +289,15 @@ export default function ContactForm() {
                   className="h-[62px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors focus:border-white"
                 >
                   <option value="" className="bg-black">—Please choose an option—</option>
-                  {howDidYouFindOptions.map((opt) => (
-                    <option key={opt} value={opt} className="bg-black">{opt}</option>
+                  {ORDER_DISCOVERY_SOURCES.map((opt) => (
+                    <option key={opt} value={opt} className="bg-black">{opt.charAt(0).toUpperCase() + opt.slice(1)}</option>
                   ))}
                 </select>
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[0.9rem] text-red-500">
                   ▼
                 </span>
               </div>
+              {errors.discoverySource && <p className="text-red-400 text-xs mt-1">{errors.discoverySource}</p>}
             </div>
 
             {/* Tell your story */}
