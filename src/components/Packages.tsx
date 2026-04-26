@@ -82,7 +82,7 @@ export default function Packages() {
               <div className="flex flex-1 flex-col items-center px-6 py-8">
                 <h3
                   className="mb-6 text-center font-serif text-xl font-normal tracking-wide"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  
                 >
                   {pkg.name}
                 </h3>

@@ -89,7 +89,7 @@ export default function GalleriesMain() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-serif text-[clamp(2.5rem,6vw,5.5rem)] font-light tracking-[0.05em] uppercase mb-4"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
           >
             {t('heading')}
           </motion.h1>

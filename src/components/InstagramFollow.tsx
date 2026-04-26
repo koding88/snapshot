@@ -4,9 +4,12 @@ import { motion } from 'framer-motion';
 import { Instagram } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { usePublicSiteSettings } from '@/hooks/useSiteSettings';
 
 export default function InstagramFollow() {
   const t = useTranslations('InstagramFollow');
+  const { data: siteSettings } = usePublicSiteSettings();
+  const instagramUrl = siteSettings?.socialLinks.instagramUrl || '#';
   return (
     <section className="bg-black px-8 py-20 text-white md:px-14 lg:px-24 lg:py-24 xl:px-32">
       <div className="mx-auto max-w-[1680px]">
@@ -20,7 +23,9 @@ export default function InstagramFollow() {
           className="flex justify-center pt-16"
         >
           <Link
-            href="#"
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-8 bg-[#f5f3ef] px-8 py-6 text-black transition-transform duration-300 hover:-translate-y-1"
           >
             <Instagram size={24} strokeWidth={1.7} />

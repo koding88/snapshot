@@ -14,7 +14,7 @@ export default function AboutUs() {
 
         <div className="mb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="font-serif text-[clamp(2.8rem,6vw,5rem)] leading-[1.1] font-normal text-white inline-block w-fit" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <div className="font-serif text-[clamp(2.8rem,6vw,5rem)] leading-[1.1] font-normal text-white inline-block w-fit" >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function AboutUs() {
             >
               <h2
                 className="font-serif tracking-[0.25em] text-[clamp(1.1rem,2.5vw,1.6rem)] uppercase font-bold text-white leading-none whitespace-nowrap"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                
               >
                 {t('studioName')}
               </h2>
@@ -106,7 +106,7 @@ export default function AboutUs() {
                 viewport={{ once: false }}
                 transition={{ duration: 0.8 }}
                 className="font-serif text-[2rem] md:text-[2.5rem] mb-6 font-normal"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                
               >
                 {t('awardsHeading')}
               </motion.h2>
@@ -135,7 +135,7 @@ export default function AboutUs() {
               <Link
                 href={`/${locale}/contact`}
                 className="font-serif text-[1.1rem] tracking-[0.3em] uppercase border-b border-white pb-1 hover:opacity-70 transition-opacity"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                
               >
                 {t('bookNow')}
               </Link>
@@ -201,7 +201,7 @@ export default function AboutUs() {
           transition={{ duration: 1.5, delay: 0.2 }}
           className="mt-32 md:mt-48 mb-24 md:mb-32 text-center"
         >
-          <p className="font-serif text-[clamp(0.95rem,1.5vw,1.3rem)] italic font-bold opacity-100 tracking-wider text-white px-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <p className="font-serif text-[clamp(0.95rem,1.5vw,1.3rem)] italic font-bold opacity-100 tracking-wider text-white px-8" >
             &ldquo;The enchantment of a story is hidden in its more subtle details&rdquo;.
           </p>
         </motion.div>

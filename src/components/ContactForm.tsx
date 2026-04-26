@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, type FormEvent, useEffect, useRef } from 'react';
+import toast from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
 import { COUNTRY_CODES, COUNTRY_NAME_TO_CODE } from '@/types/country-codes.constant';
 import { motion } from 'framer-motion';
@@ -8,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { usePublicGalleries } from '@/hooks/useGalleries';
 import { usePublicPackages } from '@/hooks/usePackages';
 import { useRequestOrder } from '@/hooks/useOrders';
+import { usePublicSiteSettings } from '@/hooks/useSiteSettings';
 
 
 // Build country list with name and code for select
@@ -32,6 +34,8 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [emailPrefix, setEmailPrefix] = useState('');
   const [countryCode, setCountryCode] = useState('');
+  const [countrySearch, setCountrySearch] = useState('');
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [galleryId, setGalleryId] = useState('');
   const [packageId, setPackageId] = useState('');
   const [howFound, setHowFound] = useState('');
@@ -39,7 +43,14 @@ export default function ContactForm() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [errorMessage, setErrorMessage] = useState('');
+  // Custom package state
+  const [customAmount, setCustomAmount] = useState('');
+  const [customCurrency, setCustomCurrency] = useState('EUR');
+  const CURRENCY_OPTIONS = [
+    { value: 'EUR', label: 'EUR', flag: '🇪🇺' },
+    { value: 'USD', label: 'USD', flag: '🇺🇸' },
+    { value: 'VND', label: 'VND', flag: '🇻🇳' },
+  ];
 
   const { data: galleriesData } = usePublicGalleries({ limit: 50 });
   const { data: packagesData } = usePublicPackages({ limit: 50 });
@@ -47,77 +58,132 @@ export default function ContactForm() {
 
   const galleries = galleriesData?.items ?? [];
   const packages = packagesData?.items ?? [];
+  const { data: siteSettings } = usePublicSiteSettings();
+  const whatsappUrl = siteSettings?.socialLinks.whatsappUrl || 'https://wa.me/84944659659';
+  const contactEmail = siteSettings?.contactInfo.contactEmail || 'fixteamstudio@mail.com';
+  const officeAddress = siteSettings?.contactInfo.officeAddress || '59/381 Nguyen Khang, Yen Hoa, Cau Giay, Ha Noi, Viet Nam';
+
+  // Filtered countries for search
+  const filteredCountries = countrySearch
+    ? countries.filter((c) =>
+        c.name.toLowerCase().includes(countrySearch.toLowerCase())
+      )
+    : countries;
 
   // Auto-select package if packageId is in query params
   useEffect(() => {
     const selected = searchParams?.get('packageId');
     if (selected) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPackageId(selected);
-      // Scroll to form
       setTimeout(() => {
+        setPackageId(selected);
         formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 100);
+      }, 0);
     }
     // eslint-disable-next-line
   }, [searchParams]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!showCountryDropdown) return;
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.country-search-dropdown')) {
+        setShowCountryDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [showCountryDropdown]);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setErrorMessage('');
     const email = `${emailPrefix}@gmail.com`;
     const newErrors: { [key: string]: string } = {};
     // Validate required fields
-    if (!name) newErrors.name = 'Name is required';
-    if (!emailPrefix) newErrors.email = 'Email is required';
+    if (!name) newErrors.name = t('errorNameRequired');
+    if (!emailPrefix) newErrors.email = t('errorEmailRequired');
     // Validate emailPrefix (only allow a-z, 0-9, dot, underscore, min 3 chars)
     if (emailPrefix && !/^[a-zA-Z0-9._%+-]{3,}$/.test(emailPrefix)) {
-      newErrors.email = 'Email format is invalid';
+      const errMsg = t('errorEmailInvalid');
+      newErrors.email = errMsg;
     }
-    if (!countryCode) newErrors.countryCode = 'Country is required';
-    if (!galleryId) newErrors.galleryId = 'Category is required';
-    if (!packageId) newErrors.packageId = 'Package is required';
-    if (!phoneNumber) newErrors.phoneNumber = 'Phone number is required';
+    if (!countryCode) newErrors.countryCode = t('errorCountryRequired');
+    if (!galleryId) newErrors.galleryId = t('errorGalleryRequired');
+    if (!packageId) newErrors.packageId = t('errorPackageRequired');
+    if (!phoneNumber) newErrors.phoneNumber = t('errorPhoneRequired');
     // Validate phone number (digits, +, -, space, min 8 chars)
     if (phoneNumber && !/^[+\d][\d\s\-]{7,}$/.test(phoneNumber)) {
-      newErrors.phoneNumber = 'Phone number format is invalid';
+      newErrors.phoneNumber = t('errorPhoneInvalid');
     }
-    if (!howFound) newErrors.discoverySource = 'Discovery source is required';
+    if (!howFound) newErrors.discoverySource = t('errorDiscoveryRequired');
+    // Nếu chọn custom thì validate amount và currency
+    if (packageId === 'custom') {
+      if (!customAmount || isNaN(Number(customAmount)) || Number(customAmount) < 0) {
+        newErrors.customAmount = 'Please enter a valid amount';
+      }
+      if (!customCurrency || !CURRENCY_OPTIONS.some(c => c.value === customCurrency)) {
+        newErrors.customCurrency = 'Please select a currency';
+      }
+    }
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      // Show all errors as toast
+      Object.values(newErrors).forEach((msg) => toast.error(msg));
       return;
     }
     setErrors({});
+    // Build payload
+    const payload: any = {
+      name,
+      email,
+      countryCode,
+      galleryId,
+      discoverySource: howFound,
+      personalStory: story || undefined,
+      phoneNumber: phoneNumber || undefined,
+    };
+    if (packageId === 'custom') {
+      payload.packageId = undefined;
+      payload.budget = {
+        amount: Number(customAmount),
+        currency: customCurrency,
+      };
+    } else {
+      payload.packageId = packageId;
+      payload.budget = undefined;
+    }
     requestOrder(
-      {
-        name,
-        email,
-        countryCode,
-        galleryId,
-        packageId,
-        discoverySource: howFound,
-        personalStory: story || undefined,
-        phoneNumber: phoneNumber || undefined,
-      },
+      payload,
       {
         onSuccess: () => {
           setSubmitted(true);
           setName('');
           setEmailPrefix('');
           setCountryCode('');
+          setCountrySearch('');
           setGalleryId('');
           setPackageId('');
           setHowFound('');
           setStory('');
+          setPhoneNumber('');
+          setCustomAmount('');
+          setCustomCurrency('EUR');
+          toast.success(t('successMessage'));
         },
         onError: (error: any) => {
-          let message = 'An error occurred. Please try again.';
+          let message = t('errorGeneric');
           if (error?.response?.data?.message) {
-            message = error.response.data.message;
+            // Nếu message là key dịch thì dịch, nếu không thì giữ nguyên
+            const msg = error.response.data.message;
+            if (typeof msg === 'string' && msg.startsWith('ContactForm.')) {
+              message = t(msg.replace('ContactForm.', ''));
+            } else {
+              message = msg;
+            }
           } else if (error?.message) {
             message = error.message;
           }
-          setErrorMessage(message);
+          toast.error(message);
         },
       },
     );
@@ -135,7 +201,7 @@ export default function ContactForm() {
         >
           <h1
             className="font-serif text-[2.5rem] font-normal uppercase leading-[1.1] tracking-[0.05em] text-white sm:text-[3.5rem] md:text-[4.5rem]"
-            style={{ fontFamily: "'Playfair Display', serif" }}
+            
           >
             {t('heading')}
           </h1>
@@ -151,17 +217,7 @@ export default function ContactForm() {
             transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-9"
           >
-            {/* Error message (API or global) */}
-            {errorMessage && (
-              <div className="rounded-md border border-red-500/50 bg-red-500/10 px-4 py-3 text-sm text-red-400 mb-2">
-                {errorMessage}
-              </div>
-            )}
-            {submitted && (
-              <div className="rounded-md border border-green-500/50 bg-green-500/10 px-4 py-3 text-sm text-green-400">
-                {t('successMessage')}
-              </div>
-            )}
+            {/* Toast notification will show error/success, no inline global message */}
 
             {/* Name */}
             <div className="space-y-3">
@@ -174,7 +230,7 @@ export default function ContactForm() {
                 onChange={(e) => setName(e.target.value)}
                 className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.5rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
               />
-              {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+              {/* {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>} */}
             </div>
 
             {/* Email with @gmail.com suffix */}
@@ -193,29 +249,51 @@ export default function ContactForm() {
                   @gmail.com
                 </span>
               </div>
-              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+              {/* {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>} */}
             </div>
 
-            {/* Where are you based? - Country select */}
+            {/* Where are you based? - Country search select */}
             <div className="space-y-3">
               <label className="block text-[1rem] text-white">{t('countryLabel')}</label>
-              <div className="relative">
-                <select
-                  required
-                  value={countryCode}
-                  onChange={(e) => setCountryCode(e.target.value)}
-                  className="h-[62px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors focus:border-white"
-                >
-                  <option value="" className="bg-black">Select Country</option>
-                  {countries.map((c) => (
-                    <option key={c.code} value={c.code} className="bg-black">{c.name}</option>
-                  ))}
-                </select>
+              <div className="relative country-search-dropdown">
+                <input
+                  type="text"
+                  autoComplete="off"
+                  value={countryCode ? countries.find(c => c.code === countryCode)?.name || countrySearch : countrySearch}
+                  onChange={e => {
+                    setCountrySearch(e.target.value);
+                    setCountryCode('');
+                    setShowCountryDropdown(true);
+                  }}
+                  onFocus={() => setShowCountryDropdown(true)}
+                  placeholder="Select Country"
+                  className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 pr-12 text-[1rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
+                />
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[0.9rem] text-red-500">
                   ▼
                 </span>
+                {showCountryDropdown && (
+                  <ul className="absolute left-0 right-0 top-full z-20 max-h-60 overflow-auto rounded-md border border-white/20 bg-black py-1 shadow-lg country-search-dropdown">
+                    {filteredCountries.length === 0 && (
+                      <li className="px-4 py-2 text-white/60">No country found</li>
+                    )}
+                    {filteredCountries.map((c) => (
+                      <li
+                        key={c.code}
+                        className={`px-4 py-2 cursor-pointer hover:bg-white/10 text-white ${countryCode === c.code ? 'bg-white/10 font-bold' : ''}`}
+                        onClick={() => {
+                          setCountryCode(c.code);
+                          setCountrySearch('');
+                          setShowCountryDropdown(false);
+                        }}
+                      >
+                        {c.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-              {errors.countryCode && <p className="text-red-400 text-xs mt-1">{errors.countryCode}</p>}
+              {/* {errors.countryCode && <p className="text-red-400 text-xs mt-1">{errors.countryCode}</p>} */}
             </div>
 
             {/* Categories (Gallery) */}
@@ -237,7 +315,7 @@ export default function ContactForm() {
                   ▼
                 </span>
               </div>
-              {errors.galleryId && <p className="text-red-400 text-xs mt-1">{errors.galleryId}</p>}
+              {/* {errors.galleryId && <p className="text-red-400 text-xs mt-1">{errors.galleryId}</p>} */}
             </div>
 
             {/* Price / Package */}
@@ -256,12 +334,45 @@ export default function ContactForm() {
                       {pkg.name} – ${pkg.pricing.amount} {pkg.pricing.currency}
                     </option>
                   ))}
+                  <option value="custom" className="bg-black">Custom</option>
                 </select>
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[0.9rem] text-red-500">
                   ▼
                 </span>
               </div>
-              {errors.packageId && <p className="text-red-400 text-xs mt-1">{errors.packageId}</p>}
+              {/* {errors.packageId && <p className="text-red-400 text-xs mt-1">{errors.packageId}</p>} */}
+              {/* Nếu chọn custom thì hiện input nhập amount và currency */}
+              {packageId === 'custom' && (
+                <div className="flex flex-col gap-3 mt-4">
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      placeholder="Amount"
+                      value={customAmount}
+                      onChange={e => setCustomAmount(e.target.value)}
+                      className="h-[54px] w-2/3 rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.2rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
+                    />
+                    <div className="relative w-1/3">
+                      <select
+                        value={customCurrency}
+                        onChange={e => setCustomCurrency(e.target.value)}
+                        className="h-[54px] w-full appearance-none rounded-[4px] border border-white/45 bg-transparent px-4 pr-10 text-[1.2rem] text-white outline-none transition-colors focus:border-white"
+                      >
+                        {CURRENCY_OPTIONS.map(opt => (
+                          <option key={opt.value} value={opt.value} className="bg-black">
+                            {opt.flag} {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[1.1rem] text-white">▼</span>
+                    </div>
+                  </div>
+                  {/* {errors.customAmount && <p className="text-red-400 text-xs mt-1">{errors.customAmount}</p>} */}
+                  {/* {errors.customCurrency && <p className="text-red-400 text-xs mt-1">{errors.customCurrency}</p>} */}
+                </div>
+              )}
             </div>
 
             {/* Phone Number */}
@@ -275,7 +386,7 @@ export default function ContactForm() {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="h-[62px] w-full rounded-[4px] border border-white/45 bg-transparent px-4 text-[1.5rem] text-white outline-none transition-colors placeholder:text-white focus:border-white"
               />
-              {errors.phoneNumber && <p className="text-red-400 text-xs mt-1">{errors.phoneNumber}</p>}
+              {/* {errors.phoneNumber && <p className="text-red-400 text-xs mt-1">{errors.phoneNumber}</p>} */}
             </div>
 
             {/* How did you find Us? - Dropdown */}
@@ -297,7 +408,7 @@ export default function ContactForm() {
                   ▼
                 </span>
               </div>
-              {errors.discoverySource && <p className="text-red-400 text-xs mt-1">{errors.discoverySource}</p>}
+              {/* {errors.discoverySource && <p className="text-red-400 text-xs mt-1">{errors.discoverySource}</p>} */}
             </div>
 
             {/* Tell your story */}
@@ -337,7 +448,7 @@ export default function ContactForm() {
             <div className="flex flex-col">
               <p
                 className="max-w-[520px] text-[0.95rem] leading-[1.85] text-white"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+               
               >
                 {t('contactDesc')}
               </p>
@@ -345,17 +456,17 @@ export default function ContactForm() {
               <div className="mt-14 space-y-10 text-[1.02rem] leading-[2.1] text-white">
                 <div>
                   <p className="mb-2">{t('officeLabel')}</p>
-                  <p>59/381 Nguyen Khang, Yen Hoa, Cau Giay, Ha Noi, Viet Nam</p>
+                  <p>{officeAddress}</p>
                 </div>
 
                 <div>
                   <p className="mb-2">{t('mailLabel')}</p>
-                  <p>fixteamstudio@mail.com</p>
+                  <p>{contactEmail}</p>
                 </div>
 
                 <div>
                   <p className="mb-2">{t('whatsappLabel')}</p>
-                  <p>+84 914901710</p>
+                  <p>{whatsappUrl.replace('https://wa.me/', '+')}</p>
                 </div>
               </div>
             </div>

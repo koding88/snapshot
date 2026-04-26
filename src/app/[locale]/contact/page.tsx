@@ -1,8 +1,10 @@
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import InstagramFollow from '@/components/InstagramFollow';
 import ContactHero from '@/components/ContactHero';
 import ContactForm from '@/components/ContactForm';
+import ToastProvider from '@/components/ToastProvider';
 import { Suspense } from 'react';
 
 export default function ContactPage() {

@@ -256,7 +256,7 @@ export default function BlogDetailContent() {
             <div className="flex-2 flex justify-center text-center px-10">
               <h3
                 className="font-serif text-[clamp(1rem,2vw,1.2rem)] leading-none text-white font-normal text-wrap tracking-wide"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                
               >
                 {blog.name}m
               </h3>
@@ -373,7 +373,7 @@ export default function BlogDetailContent() {
                   <span className="text-[0.7rem] font-bold tracking-[0.4em] uppercase text-white/50 mb-3 block">PREV.</span>
                   <span
                     className="font-serif text-[1rem] md:text-[1.1rem] text-white/80 group-hover:text-white transition-colors duration-500"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
+                    
                   >
                     {prevBlog?.name ?? '—'}
                   </span>
@@ -403,7 +403,7 @@ export default function BlogDetailContent() {
                   <span className="text-[0.7rem] font-bold tracking-[0.4em] uppercase text-white/50 mb-3 block">NEXT</span>
                   <span
                     className="font-serif text-[1rem] md:text-[1.1rem] text-white/80 group-hover:text-white transition-colors duration-500"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
+                    
                   >
                     {nextBlog?.name ?? '—'}
                   </span>

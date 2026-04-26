@@ -37,7 +37,7 @@ function OrderRequestConfirmPageContent() {
         {!token && (
           <div className="flex flex-col items-center gap-4">
             <XCircle className="h-16 w-16 text-red-400" />
-            <h1 className="font-serif text-2xl text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h1 className="font-serif text-2xl text-white" >
               {t('invalidLink')}
             </h1>
             <p className="text-sm text-white/60">{t('invalidLinkDesc')}</p>
@@ -48,7 +48,7 @@ function OrderRequestConfirmPageContent() {
         {token && isPending && (
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="h-16 w-16 animate-spin text-[#c8b8ab]" />
-            <h1 className="font-serif text-2xl text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h1 className="font-serif text-2xl text-white" >
               {t('confirming')}
             </h1>
             <p className="text-sm text-white/60">{t('confirmingDesc')}</p>
@@ -59,7 +59,7 @@ function OrderRequestConfirmPageContent() {
         {token && isSuccess && (
           <div className="flex flex-col items-center gap-4">
             <CheckCircle className="h-16 w-16 text-green-400" />
-            <h1 className="font-serif text-2xl text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h1 className="font-serif text-2xl text-white" >
               {t('successTitle')}
             </h1>
             <p className="text-sm text-white/60">{t('successDesc')}</p>
@@ -70,7 +70,7 @@ function OrderRequestConfirmPageContent() {
         {token && isError && (
           <div className="flex flex-col items-center gap-4">
             <XCircle className="h-16 w-16 text-red-400" />
-            <h1 className="font-serif text-2xl text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h1 className="font-serif text-2xl text-white" >
               {t('errorTitle')}
             </h1>
             <p className="text-sm text-white/60">

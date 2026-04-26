@@ -122,7 +122,7 @@ function LightboxContent({
             <div className="h-12 w-[1px] bg-white/20 rotate-[25deg] mx-10 hidden md:block" />
 
             <div className="flex-2 flex justify-center text-center px-10">
-              <h3 className="font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-none text-white font-normal whitespace-nowrap tracking-wide" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h3 className="font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-none text-white font-normal whitespace-nowrap tracking-wide" >
                 {currentImage.title}
               </h3>
             </div>
@@ -198,7 +198,7 @@ function LightboxContent({
                 className="flex flex-col items-center md:items-start text-center md:text-left group cursor-pointer"
               >
                 <span className="text-[0.7rem] font-bold tracking-[0.4em] uppercase text-white/50 mb-3 block">PREV.</span>
-                <span className="font-serif text-[1rem] md:text-[1.1rem] text-white/80 group-hover:text-white transition-colors duration-500" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <span className="font-serif text-[1rem] md:text-[1.1rem] text-white/80 group-hover:text-white transition-colors duration-500" >
                   {images[(currentIndex - 1 + images.length) % images.length]?.title}
                 </span>
               </div>
@@ -223,7 +223,7 @@ function LightboxContent({
                 className="flex flex-col items-center md:items-end text-center md:text-right group cursor-pointer"
               >
                 <span className="text-[0.7rem] font-bold tracking-[0.4em] uppercase text-white/50 mb-3 block">NEXT</span>
-                <span className="font-serif text-[1rem] md:text-[1.1rem] text-white/80 group-hover:text-white transition-colors duration-500" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <span className="font-serif text-[1rem] md:text-[1.1rem] text-white/80 group-hover:text-white transition-colors duration-500" >
                   {images[(currentIndex + 1) % images.length]?.title}
                 </span>
               </div>

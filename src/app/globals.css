@@ -14,7 +14,7 @@
   --color-accent: var(--accent);
   --color-muted-accent: var(--muted-accent);
   --color-soft-white: var(--soft-white);
-  --font-serif: var(--font-playfair), serif;
+  --font-serif: var(--font-inter), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
 }
 
@@ -30,7 +30,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif uppercase tracking-widest;
+    @apply font-sans uppercase tracking-widest;
   }
 }
 

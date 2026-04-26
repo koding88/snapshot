@@ -73,7 +73,7 @@ export default function PortfolioGrid() {
             </div>
           </div>
 
-          <div className="mt-16 flex justify-center lg:-ml-14 lg:-mt-40 lg:justify-start">
+          <div className="mt-16 flex justify-center lg:-ml-14 lg:-mt-20 lg:justify-start">
             <Link href="/about">
               <motion.button
                 whileHover={{ y: -3 }}

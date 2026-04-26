@@ -5,7 +5,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { QueryProvider } from "@/providers/QueryProvider";
+import Providers from '@/providers/Providers';
 import "../globals.css";
 
 const baseUrl = "https://snapshothanoi.com";
@@ -89,7 +89,13 @@ export async function generateMetadata({
         "Premium cinematic wedding and elopement photography studio based in Vietnam.",
       images: [ogImage],
     },
-    icons: { icon: ogImage },
+    icons: {
+      icon: [
+        { url: "/favicon.svg", type: "image/svg+xml" },
+        // Nếu có favicon.ico thì thêm dòng dưới
+        // { url: "/favicon.ico", type: "image/x-icon" },
+      ],
+    },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: {
@@ -145,7 +151,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={htmlLang}
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased`}
       suppressHydrationWarning={true}
     >
       <body
@@ -153,9 +159,9 @@ export default async function LocaleLayout({
         suppressHydrationWarning={true}
       >
         <NextIntlClientProvider messages={messages}>
-          <QueryProvider>
+          <Providers>
             {children}
-          </QueryProvider>
+          </Providers>
         </NextIntlClientProvider>
         <Script
           id="json-ld"

@@ -28,4 +28,8 @@ export const queryKeys = {
     public: (params?: PaginationParams) =>
       [...queryKeys.packages.all, 'public', params] as const,
   },
+  siteSettings: {
+    all: ['siteSettings'] as const,
+    public: () => [...queryKeys.siteSettings.all, 'public'] as const,
+  },
 } as const;

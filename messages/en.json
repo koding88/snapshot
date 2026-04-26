@@ -1,4 +1,6 @@
+
 {
+
   "Navbar": {
     "home": "Home",
     "about": "About Us",
@@ -81,6 +83,8 @@
   },
   "Footer": {
     "tagline": "Snapshot Hanoi was created for the new ways we live and work. We make beautiful photography around the world.",
+    "officeLabel": "Office",
+    "mailLabel": "Email",
     "servicesHeading": "Services",
     "portfolio": "Portfolio",
     "pricing": "Pricing",
@@ -121,23 +125,38 @@
     ],
     "bookNow": "Book Now"
   },
-  "ContactForm": {
-    "heading": "Contact",
-    "nameLabel": "Your Name",
-    "emailLabel": "Your Email address",
-    "countryLabel": "Where are you based?",
-    "categoriesLabel": "Categories",
-    "pricePackageLabel": "Price Package",
-    "howFoundLabel": "How did you find Us?",
-    "budgetLabel": "Your photography budget (please specify the currency)",
-    "storyLabel": "Tell us all about your story, your interests and your plans! (Share as much info as you like!)",
-    "submitLabel": "Send Message",
-    "successMessage": "Your request has been sent successfully! Please check your email to confirm.",
-    "contactDesc": "We\u2019d love to find out all about you and your wedding plans! Please share some details in the contact form below and we\u2019ll get back to you with some more information. We can\u2019t wait to chat more!",
-    "officeLabel": "Office:",
-    "mailLabel": "Mail:",
-    "whatsappLabel": "Whatsapp:"
-  },
+"ContactForm": {
+  "heading": "Contact",
+  "nameLabel": "Your Name",
+  "emailLabel": "Your Email address",
+  "countryLabel": "Where are you based?",
+  "categoriesLabel": "Categories",
+  "pricePackageLabel": "Price Package",
+  "howFoundLabel": "How did you find Us?",
+  "storyLabel": "Tell us all about your story...",
+  "submitLabel": "Send Message",
+  "contactDesc": "We'd love to learn more about you and your wedding plans! Please share some information in the contact form below and we'll get back to you as soon as possible. See you soon!",
+  "officeLabel": "Office:",
+  "mailLabel": "Mail:",
+  "whatsappLabel": "Whatsapp:",
+  "successMessage": "Your request has been sent successfully!",
+  "errorNameRequired": "Name is required",
+  "errorEmailRequired": "Email is required",
+  "errorEmailInvalid": "Email format is invalid",
+  "errorCountryRequired": "Country is required",
+  "errorGalleryRequired": "Category is required",
+  "errorPackageRequired": "Package is required",
+  "errorPhoneRequired": "Phone number is required",
+  "errorPhoneInvalid": "Phone number format is invalid",
+  "errorDiscoveryRequired": "Discovery source is required",
+  "errorGeneric": "An error occurred. Please try again.",
+  "placeholderName": "Your name",
+  "placeholderEmail": "Your email (without @gmail.com)",
+    "placeholderCountry": "Select country",
+    "placeholderAmount": "Amount",
+    "placeholderPhone": "Phone number",
+    "placeholderStory": "Tell us your story..."
+},
   "GalleriesMain": {
     "heading": "Galleries",
     "keepOnLovin": "Keep on Lovin"
