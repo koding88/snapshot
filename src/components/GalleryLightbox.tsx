@@ -110,10 +110,24 @@ function LightboxContent({
             <div className="flex flex-col gap-3 flex-1">
               <span className="text-[0.7rem] font-bold tracking-[0.3em] uppercase text-white/50">Share:</span>
               <div className="flex gap-8 text-white/70">
-                <button className="hover:text-white transition-colors duration-300">
+                <button
+                  className="hover:text-white transition-colors duration-300"
+                  onClick={() => {
+                    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentImage.src)}`;
+                    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+                  }}
+                  aria-label="Share on Facebook"
+                >
                   <FaFacebookF size={15} />
                 </button>
-                <button className="hover:text-white transition-colors duration-300">
+                <button
+                  className="hover:text-white transition-colors duration-300"
+                  onClick={() => {
+                    const shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(currentImage.src)}&media=${encodeURIComponent(currentImage.src)}&description=${encodeURIComponent(currentImage.title)}`;
+                    window.open(shareUrl, '_blank', 'noopener,noreferrer');
+                  }}
+                  aria-label="Share on Pinterest"
+                >
                   <FaPinterestP size={15} />
                 </button>
               </div>

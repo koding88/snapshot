@@ -18,8 +18,16 @@
       .st3 {
         fill: #ca6608;
       }
+
+      .st4 {
+        fill: #f7f1ec;
+      }
     </style>
   </defs>
+  <rect class="st0" width="2000" height="2000"/>
+  <g id="Background">
+    <rect class="st4" width="2000" height="2000"/>
+  </g>
   <g id="Logo">
     <g>
       <g>

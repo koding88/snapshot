@@ -90,7 +90,7 @@ export default function ProjectDetailContent() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif text-3xl md:text-5xl text-center mb-16"
         >
-          {project.name}kk
+          {project.name}
         </motion.h1>
 
         {/* Cover image */}
