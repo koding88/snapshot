@@ -135,6 +135,11 @@ export default function Navbar({
     { name: t("contact"), href: `/${currentLang}/contact`, key: "contact" },
   ];
 
+  const desktopMenuTextClass =
+    currentLang === "zh"
+      ? "text-[12px] tracking-[0.16em] lg:text-[12px]"
+      : "text-[10px] tracking-[0.3em] lg:text-[10px]";
+
   const { facebookUrl, pinterestUrl, instagramUrl, whatsappUrl } =
     siteSettings?.socialLinks ?? {};
 
@@ -179,7 +184,7 @@ export default function Navbar({
               >
                 <Link
                   href={item.href}
-                  className={`border-b-2 pb-0.5 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:opacity-70 lg:text-[10px] ${textColor} ${
+                  className={`border-b-2 pb-0.5 font-bold uppercase transition-all hover:opacity-70 ${desktopMenuTextClass} ${textColor} ${
                     pathname === item.href
                       ? "border-current"
                       : "border-transparent"
