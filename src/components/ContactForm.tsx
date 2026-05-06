@@ -66,17 +66,10 @@ export default function ContactForm() {
   const { data: galleriesData } = usePublicGalleries({ limit: 50 });
   const { data: packagesData } = usePublicPackages({ limit: 50 });
   const { mutate: requestOrder, isPending } = useRequestOrder();
+  const { data: siteSettings } = usePublicSiteSettings();
 
   const galleries = galleriesData?.items ?? [];
   const packages = packagesData?.items ?? [];
-  const { data: siteSettings } = usePublicSiteSettings();
-  const whatsappUrl =
-    siteSettings?.socialLinks.whatsappUrl || "https://wa.me/84944659659";
-  const contactEmail =
-    siteSettings?.contactInfo.contactEmail || "fixteamstudio@mail.com";
-  const officeAddress =
-    siteSettings?.contactInfo.officeAddress ||
-    "59/381 Nguyen Khang, Yen Hoa, Cau Giay, Ha Noi, Viet Nam";
 
   // Filtered countries for search
   const filteredCountries = countrySearch
@@ -125,6 +118,15 @@ export default function ContactForm() {
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, [showCurrencyDropdown]);
+
+  const { whatsappUrl, instagramUrl } = siteSettings?.socialLinks ?? {
+    whatsappUrl: null,
+    instagramUrl: null,
+  };
+  const { contactEmail, officeAddress } = siteSettings?.contactInfo ?? {
+    contactEmail: null,
+    officeAddress: null,
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -564,7 +566,9 @@ export default function ContactForm() {
 
                 <div>
                   <p className="mb-2">{t("whatsappLabel")}</p>
-                  <p>{whatsappUrl.replace("https://wa.me/", "+")}</p>
+                  <p>
+                    {whatsappUrl?.replace("https://wa.me/", "+") || whatsappUrl}
+                  </p>
                 </div>
               </div>
             </div>
