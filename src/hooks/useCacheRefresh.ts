@@ -14,9 +14,11 @@ export function useCacheRefresh() {
     const handleVisibilityChange = () => {
       if (document.visibilityState !== "visible") return;
 
-      if (cacheManager.shouldFetchGalleries()) {
+      const locale = document.documentElement.lang?.split("-")[0] || "en";
+
+      if (cacheManager.shouldFetchGalleries(locale)) {
         queryClient.refetchQueries({
-          queryKey: queryKeys.galleries.public(),
+          queryKey: queryKeys.galleries.public(locale),
           type: "active",
         });
       }

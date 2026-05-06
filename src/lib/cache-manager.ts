@@ -8,6 +8,10 @@ const CACHE_KEYS = {
   SITE_SETTINGS: "cache_site_settings_data",
 } as const;
 
+function getGalleriesKey(locale: string) {
+  return `${CACHE_KEYS.GALLERIES}_${locale}`;
+}
+
 const GALLERIES_TTL = 1000 * 60 * 60; // 1 hour
 const SITE_SETTINGS_TTL = 1000 * 60 * 60 * 3; // 3 hours
 
@@ -55,16 +59,16 @@ class CacheManager {
     return this.getEntry<T>(key)?.data ?? null;
   }
 
-  shouldFetchGalleries(): boolean {
-    return !this.isValid(CACHE_KEYS.GALLERIES, GALLERIES_TTL);
+  shouldFetchGalleries(locale: string): boolean {
+    return !this.isValid(getGalleriesKey(locale), GALLERIES_TTL);
   }
 
-  setGalleriesData<T>(data: T): void {
-    this.setEntry(CACHE_KEYS.GALLERIES, data);
+  setGalleriesData<T>(locale: string, data: T): void {
+    this.setEntry(getGalleriesKey(locale), data);
   }
 
-  getGalleriesData<T>(): T | null {
-    return this.getValidData<T>(CACHE_KEYS.GALLERIES, GALLERIES_TTL);
+  getGalleriesData<T>(locale: string): T | null {
+    return this.getValidData<T>(getGalleriesKey(locale), GALLERIES_TTL);
   }
 
   shouldFetchSiteSettings(): boolean {
