@@ -456,17 +456,36 @@ export default function ContactForm() {
               <div className="mt-14 space-y-10 text-[1.02rem] leading-[2.1] text-white">
                 <div>
                   <p className="mb-2">{t('officeLabel')}</p>
-                  <p>{officeAddress}</p>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline hover:text-white/70 transition-colors"
+                  >
+                    {officeAddress}
+                  </a>
                 </div>
 
                 <div>
                   <p className="mb-2">{t('mailLabel')}</p>
-                  <p>{contactEmail}</p>
+                  <a
+                    href={`mailto:${contactEmail}`}
+                    className="hover:underline hover:text-white/70 transition-colors"
+                  >
+                    {contactEmail}
+                  </a>
                 </div>
 
                 <div>
                   <p className="mb-2">{t('whatsappLabel')}</p>
-                  <p>{whatsappUrl.replace('https://wa.me/', '+')}</p>
+                  <a
+                    href="https://api.whatsapp.com/send?phone=84944659659"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline hover:text-white/70 transition-colors"
+                  >
+                    {whatsappUrl.replace('https://wa.me/', '+').replace('https://api.whatsapp.com/send?phone=', '+')}
+                  </a>
                 </div>
               </div>
             </div>

@@ -22,5 +22,6 @@ export function usePublicProject(id: string) {
     queryFn: () => projectsApi.getPublicById(id),
     select: (res) => res.data,
     enabled: Boolean(id),
+    staleTime: 0,
   });
 }

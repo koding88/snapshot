@@ -115,13 +115,13 @@ export default function Footer() {
             <h3 className="font-serif text-xl font-normal text-[#2c2c2c] tracking-wide" >{tNav('contact')}</h3>
             <p className="text-sm leading-relaxed text-[#2c2c2c]/60">
               {officeAddress && (<>
-                {t('officeLabel')}: <span>{officeAddress}</span><br/>
+                {t('officeLabel')}: <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`} target="_blank" rel="noopener noreferrer" className="underline hover:text-[#2c2c2c]">{officeAddress}</a><br/>
               </>)}
               {contactEmail && (<>
                 {t('mailLabel')}: <a href={`mailto:${contactEmail}`} className="underline hover:text-[#2c2c2c]">{contactEmail}</a><br/>
               </>)}
               {whatsappUrl && (<>
-                WhatsApp: <a href={whatsappUrl} className="underline hover:text-[#2c2c2c]">{whatsappUrl.replace('https://wa.me/', '+')}</a><br/>
+                WhatsApp: <a href="https://api.whatsapp.com/send?phone=84944659659" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#2c2c2c]">+84944659659</a><br/>
               </>)}
               {instagramUrl && (<>
                 Instagram: <a href={instagramUrl} className="underline hover:text-[#2c2c2c]" target="_blank" rel="noopener noreferrer">{instagramUrl.replace('https://www.instagram.com/', '').replace(/\/$/, '')}</a><br/>
