@@ -46,7 +46,7 @@ export default function CinematicStory() {
           <motion.h2
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="font-serif text-[2.1rem] font-bold leading-[0.85] tracking-[0.12em] text-[#f2e8cf]"
+            className="font-serif text-[2.1rem] font-bold leading-[1.25] tracking-[0.12em] text-[#f2e8cf]"
             
           >
             {t('titleLine1')}<br />
