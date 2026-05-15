@@ -129,7 +129,15 @@ export default function Footer() {
             <p className="text-sm leading-relaxed text-[#2c2c2c]/60">
               {officeAddress && (
                 <>
-                  {t("officeLabel")}: <span>{officeAddress}</span>
+                  {t("officeLabel")}:{" "}
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-[#2c2c2c]"
+                  >
+                    {officeAddress}
+                  </a>
                   <br />
                 </>
               )}
@@ -151,8 +159,10 @@ export default function Footer() {
                   <a
                     href={whatsappUrl}
                     className="underline hover:text-[#2c2c2c]"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {whatsappUrl?.replace("https://wa.me/", "+") || whatsappUrl}
+                    {whatsappUrl.replace('https://wa.me/', '+').replace('https://api.whatsapp.com/send?phone=', '+')}
                   </a>
                   <br />
                 </>
@@ -166,9 +176,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {instagramUrl
-                      ?.replace("https://www.instagram.com/", "")
-                      .replace(/\/$/, "") || instagramUrl}
+                    {instagramUrl?.replace("https://www.instagram.com/", "").replace(/\/$/, "") || instagramUrl}
                   </a>
                   <br />
                 </>
@@ -182,9 +190,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {pinterestUrl
-                      ?.replace("https://www.pinterest.com/", "")
-                      .replace(/\/$/, "") || pinterestUrl}
+                    {pinterestUrl?.replace("https://www.pinterest.com/", "").replace(/\/$/, "") || pinterestUrl}
                   </a>
                 </>
               )}

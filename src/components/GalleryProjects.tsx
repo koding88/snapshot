@@ -17,28 +17,25 @@ function ProjectCard({
   title,
   href,
   index,
-  onImageClick,
 }: {
   src: string;
   alt: string;
   title: string;
   href: string;
   index: number;
-  onImageClick: (e: React.MouseEvent) => void;
 }) {
   return (
     <div className={`group relative flex flex-col gap-6 ${offsets[index % 4]}`}>
-      <div
-        className="relative overflow-hidden cursor-pointer aspect-[1.15] md:aspect-[1.3]"
-        onClick={onImageClick}
-      >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-          sizes="(max-width: 1024px) 90vw, 45vw"
-        />
+      <div className="relative overflow-hidden aspect-[1.15] md:aspect-[1.3]">
+        <Link href={href} className="block w-full h-full">
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+            sizes="(max-width: 1024px) 90vw, 45vw"
+          />
+        </Link>
       </div>
       <div className="text-center transition-colors duration-500">
         <Link href={href} className="font-serif text-[1rem] md:text-[1.25rem] leading-tight text-white tracking-wide hover:underline">
@@ -142,10 +139,6 @@ export default function GalleryProjects() {
                 title={project.name}
                 href={`/${locale}/galleries/${galleryId}/${project.id}`}
                 index={index}
-                onImageClick={(e) => {
-                  e.preventDefault();
-                  openLightbox(index);
-                }}
               />
             </motion.div>
           ))}
