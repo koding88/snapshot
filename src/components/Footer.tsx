@@ -131,7 +131,7 @@ export default function Footer() {
                 <>
                   {t("officeLabel")}:{" "}
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`}
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress ?? '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="underline hover:text-[#2c2c2c]"
@@ -162,7 +162,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {whatsappUrl.replace('https://wa.me/', '+').replace('https://api.whatsapp.com/send?phone=', '+')}
+                    {whatsappUrl.replace('https://wa.me/', '+')?.replace('https://api.whatsapp.com/send?phone=', '+')}
                   </a>
                   <br />
                 </>

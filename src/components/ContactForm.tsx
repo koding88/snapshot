@@ -119,9 +119,8 @@ export default function ContactForm() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [showCurrencyDropdown]);
 
-  const { whatsappUrl, instagramUrl } = siteSettings?.socialLinks ?? {
+  const { whatsappUrl } = siteSettings?.socialLinks ?? {
     whatsappUrl: null,
-    instagramUrl: null,
   };
   const { contactEmail, officeAddress } = siteSettings?.contactInfo ?? {
     contactEmail: null,
@@ -557,7 +556,7 @@ export default function ContactForm() {
                 <div>
                   <p className="mb-2">{t("officeLabel")}</p>
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`}
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress ?? '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline hover:text-white/70 transition-colors"
@@ -579,12 +578,12 @@ export default function ContactForm() {
                 <div>
                   <p className="mb-2">{t("whatsappLabel")}</p>
                   <a
-                    href={whatsappUrl}
+                    href={whatsappUrl ?? undefined}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline hover:text-white/70 transition-colors"
                   >
-                    {whatsappUrl?.replace('https://wa.me/', '+').replace('https://api.whatsapp.com/send?phone=', '+') || whatsappUrl}
+                    {whatsappUrl?.replace('https://wa.me/', '+')?.replace('https://api.whatsapp.com/send?phone=', '+') ?? whatsappUrl}
                   </a>
                 </div>
               </div>
