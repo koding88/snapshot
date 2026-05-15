@@ -73,7 +73,58 @@ export default function CinematicStory() {
         </div>
       </div>
 
-      <div className="hidden mx-auto min-h-[112vh] max-w-[1600px] items-center px-6 py-12 sm:px-10 md:flex md:px-16 lg:px-24 xl:px-32">
+      {/* Tablet safe layout */}
+      <div className="hidden md:flex xl:hidden min-h-screen flex-col items-center px-10 pt-32 pb-24">
+        <div className="w-full max-w-3xl text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="font-serif text-[2rem] leading-tight tracking-[0.08em] text-[#f2e8cf] sm:text-[2.5rem]"
+          >
+            {t('titleLine1')}
+            <br />
+            {t('titleLine2')}
+            <br />
+            {t('titleLine3')}
+          </motion.h2>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-8 max-w-xl text-center font-serif text-sm leading-[2.2] tracking-[0.35em] text-[#ffc89a]"
+        >
+          {t('quote1')}<br />
+          {t('quote2')}<br />
+          {t('quote3')}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="relative mt-16 w-[320px] max-w-[70vw] aspect-[0.68] overflow-hidden shadow-xl"
+        >
+          <Image
+            src="https://fixteamstudio.com/wp-content/uploads/2023/07/1.jpg"
+            alt="Cinematic Love Story"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1024px) 70vw, 320px"
+          />
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-12 max-w-2xl text-center font-serif text-xs font-semibold leading-[2.2] tracking-[0.32em] text-black"
+        >
+          Every frame is shaped by light, emotion, and the natural beauty of Vietnam.
+        </motion.p>
+      </div>
+
+      {/* Desktop cinematic layout */}
+      <div className="hidden xl:flex mx-auto min-h-screen max-w-[1600px] items-center px-6 py-12 sm:px-10 md:px-16 lg:px-24 xl:px-32">
         <div className="grid w-full grid-cols-1 items-center gap-y-16 lg:-translate-y-28 lg:grid-cols-[minmax(0,1.18fr)_minmax(320px,0.72fr)] lg:items-end lg:gap-x-20">
           <motion.div
             initial={{ opacity: 0, y: 26 }}
@@ -130,12 +181,13 @@ export default function CinematicStory() {
         </div>
       </div>
 
+      {/* Desktop caption (absolute overlay only from xl) */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.7 }}
         transition={{ delay: 0.25, duration: 1 }}
-        className="hidden md:block absolute inset-x-0 bottom-[29%] px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32"
+        className="hidden xl:block absolute inset-x-0 bottom-[29%] px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32"
       >
         <p className="mx-auto max-w-[1200px] text-center font-serif text-[0.72rem] font-semibold tracking-[0.42em] text-black sm:text-[0.82rem] md:text-[0.92rem]">
           Every frame is shaped by light, emotion, and the natural beauty of Vietnam.
