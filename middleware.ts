@@ -21,11 +21,17 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Root URL always redirects to default locale (vi) with permanent redirect
+  if (pathname === '/') {
+    const redirectUrl = new URL(`/${defaultLocale}`, request.url);
+    return NextResponse.redirect(redirectUrl, 308);
+  }
+
   const acceptLanguage = request.headers.get('Accept-Language') ?? '';
   const locale = getLocaleFromAcceptLanguage(acceptLanguage);
 
   const redirectUrl = new URL(`/${locale}${pathname}`, request.url);
-  return NextResponse.redirect(redirectUrl, 307);
+  return NextResponse.redirect(redirectUrl, 308);
 }
 
 export const config = {

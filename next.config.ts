@@ -7,10 +7,17 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        // Redirect non-locale paths to /en/... (requires at least 1 char, so / is excluded)
+        // Apex domain (snaphanoi.com) -> www.snaphanoi.com with default locale
+        source: '/:path*',
+        has: [{ type: 'host', value: 'snaphanoi.com' }],
+        destination: 'https://www.snaphanoi.com/vi/:path*',
+        permanent: true,
+      },
+      {
+        // Redirect non-locale paths to /vi/... (fallback for middleware bypass)
         source: '/:path((?!en|vi|zh|_next|api|images|robots\\.txt|sitemap\\.xml|favicon\\.ico|.*\\.svg$|.*\\.png$|.*\\.jpg$|.*\\.ico$|.*\\.webp$).+)',
-        destination: '/en/:path',
-        permanent: false,
+        destination: '/vi/:path',
+        permanent: true,
       },
     ];
   },
