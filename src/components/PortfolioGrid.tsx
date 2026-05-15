@@ -3,10 +3,11 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function PortfolioGrid() {
   const t = useTranslations('PortfolioGrid');
+  const locale = useLocale();
   return (
     <section className="relative -mt-20 overflow-visible text-white md:-mt-24 lg:-mt-36 xl:-mt-44">
       <div className="absolute inset-x-0 bottom-0 top-[24%] bg-black" />
@@ -74,7 +75,7 @@ export default function PortfolioGrid() {
           </div>
 
           <div className="mt-16 flex justify-center lg:-ml-14 lg:-mt-20 lg:justify-start">
-            <Link href="/about">
+            <Link href={`/${locale}/about`}>
               <motion.button
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.99 }}

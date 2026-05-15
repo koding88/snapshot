@@ -5,10 +5,11 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { siteConfig } from "@/lib/site-config";
 import Providers from '@/providers/Providers';
 import "../globals.css";
 
-const baseUrl = "https://snapshothanoi.com";
+const baseUrl = siteConfig.domain;
 const ogImage = "https://fixteamstudio.com/wp-content/uploads/2023/11/logo.png";
 
 const playfair = Playfair_Display({
@@ -35,6 +36,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const languages: Record<string, string> = {};
+  for (const l of routing.locales) {
+    languages[l] = `${baseUrl}/${l}`;
+  }
+
   return {
     metadataBase: new URL(baseUrl),
     title: {
@@ -92,16 +98,13 @@ export async function generateMetadata({
     icons: {
       icon: [
         { url: "/favicon.svg", type: "image/svg+xml" },
-        // Nếu có favicon.ico thì thêm dòng dưới
-        // { url: "/favicon.ico", type: "image/x-icon" },
       ],
     },
     alternates: {
       canonical: `${baseUrl}/${locale}`,
       languages: {
-        en: `${baseUrl}/en`,
-        vi: `${baseUrl}/vi`,
-        zh: `${baseUrl}/zh`,
+        ...languages,
+        "x-default": `${baseUrl}/${siteConfig.defaultLocale}`,
       },
     },
   };
@@ -112,15 +115,24 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: "Snapshot Hanoi",
   url: baseUrl,
-  logo: ogImage,
+  logo: `${baseUrl}/logo-snapshot.svg`,
   description:
     "Premium cinematic wedding and elopement photography studio based in Vietnam.",
-  address: { "@type": "PostalAddress", addressCountry: "VN" },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Hanoi",
+    addressCountry: "VN",
+  },
+  areaServed: ["Vietnam", "Hanoi", "Asia"],
   serviceType: [
     "Wedding Photography",
     "Elopement Photography",
     "Couples Photography",
     "Wedding Films",
+  ],
+  sameAs: [
+    siteConfig.socialLinks.instagram,
+    siteConfig.socialLinks.pinterest,
   ],
 };
 
@@ -141,7 +153,6 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  // Tell next-intl the locale for this request (populates requestLocale in getRequestConfig)
   setRequestLocale(locale);
 
   const messages = await getMessages({ locale } as { locale: string });

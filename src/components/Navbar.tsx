@@ -157,7 +157,7 @@ export default function Navbar({
       >
         <div className="mx-auto flex h-17.5 max-w-420 items-center justify-between px-6 md:px-12 lg:px-16">
           {/* Left: Logo */}
-          <Link href="/" className="shrink-0">
+          <Link href={`/${currentLang}`} className="shrink-0">
             <Image
               src="/logo-snapshot.svg"
               alt="Logo"
@@ -232,6 +232,7 @@ export default function Navbar({
                   className="transition-opacity hover:opacity-60"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Facebook Snapshot Hanoi"
                 >
                   <Facebook size={16} strokeWidth={1.2} />
                 </Link>
@@ -242,6 +243,7 @@ export default function Navbar({
                   className="transition-opacity hover:opacity-60"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Pinterest Snapshot Hanoi"
                 >
                   <PinterestIcon size={16} />
                 </Link>
@@ -252,6 +254,7 @@ export default function Navbar({
                   className="transition-opacity hover:opacity-60"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Instagram Snapshot Hanoi"
                 >
                   <Instagram size={16} strokeWidth={1.2} />
                 </Link>
@@ -283,10 +286,11 @@ export default function Navbar({
 
             {/* Language selector */}
             <div ref={langRef} className="relative">
-              <button
-                type="button"
-                onClick={() => setIsLangOpen((prev) => !prev)}
-                className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 cursor-pointer ${textColor}`}
+                <button
+                  type="button"
+                  onClick={() => setIsLangOpen((prev) => !prev)}
+                  aria-label="Select language"
+                  className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-widest transition-opacity hover:opacity-70 cursor-pointer ${textColor}`}
               >
                 <Globe size={14} />
                 <span>
@@ -353,7 +357,7 @@ export default function Navbar({
             <div className="flex h-full flex-col px-6 pb-8 pt-6">
               <div className="flex items-center justify-between">
                 <Link
-                  href="/"
+                  href={`/${currentLang}`}
                   className="shrink-0"
                   onClick={() => setIsMenuOpen(false)}
                 >

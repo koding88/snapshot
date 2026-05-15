@@ -67,9 +67,8 @@ export default function CinematicStory() {
 
         <div className="mt-auto pb-12 w-full px-4">
           <p className="font-serif text-[0.54rem] font-semibold uppercase tracking-[0.34em] text-black text-center leading-[2.4]">
-            <span className="inline-block whitespace-nowrap">Ödəniş üsullarının müxtəlifliyi</span><br />
-            <span className="inline-block whitespace-nowrap">Mostbet ilə sürətli depozit và çıxarış</span><br />
-            <span className="inline-block whitespace-nowrap">təmin edir.</span>
+            <span className="inline-block whitespace-nowrap">Mỗi khung hình được kể bằng ánh sáng,</span><br />
+            <span className="inline-block whitespace-nowrap">cảm xúc và vẻ đẹp tự nhiên của Việt Nam.</span><br />
           </p>
         </div>
       </div>
@@ -139,7 +138,7 @@ export default function CinematicStory() {
         className="hidden md:block absolute inset-x-0 bottom-[29%] px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32"
       >
         <p className="mx-auto max-w-[1200px] text-center font-serif text-[0.72rem] font-semibold tracking-[0.42em] text-black sm:text-[0.82rem] md:text-[0.92rem]">
-          Ödəniş üsullarının müxtəlifliyi Mostbet ilə sürətli depozit và çıxarış təmin edir.
+          Every frame is shaped by light, emotion, and the natural beauty of Vietnam.
         </p>
       </motion.div>
     </section>

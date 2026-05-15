@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.6fr]">
           {/* Brand column */}
           <div className="flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link href={`/${locale}`} className="flex items-center gap-2 group">
               <span className="inline-flex items-center justify-center border border-gray-200  p-1 bg-white">
                 <Image
                   src="/logo-snapshot.svg"
@@ -226,6 +226,7 @@ export default function Footer() {
             <div className="relative">
               <button
                 type="button"
+                aria-label="Select language"
                 className="flex items-center gap-1.5 transition-colors hover:text-[#2c2c2c] cursor-pointer"
               >
                 <Globe size={15} />

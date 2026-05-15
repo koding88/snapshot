@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'snapshothanoi.com',
+        hostname: 'www.snaphanoi.com',
       },
       {
         protocol: 'https',

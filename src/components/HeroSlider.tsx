@@ -66,6 +66,7 @@ export default function HeroSlider() {
         <button
           onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
           className="hover:text-white transition-colors cursor-pointer"
+          aria-label="Previous slide"
         >
           <ChevronLeft size={16} strokeWidth={1} />
         </button>
@@ -77,6 +78,7 @@ export default function HeroSlider() {
         <button
           onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
           className="hover:text-white transition-colors cursor-pointer"
+          aria-label="Next slide"
         >
           <ChevronRight size={16} strokeWidth={1} />
         </button>

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { siteConfig } from '@/lib/site-config';
 
-const locales = ['en', 'vi', 'zh'] as const;
-const defaultLocale = 'en';
+const locales = siteConfig.locales;
+const defaultLocale = siteConfig.defaultLocale;
 
 function getLocaleFromAcceptLanguage(acceptLanguage: string): string {
   const normalized = acceptLanguage.toLowerCase();
@@ -13,7 +14,6 @@ function getLocaleFromAcceptLanguage(acceptLanguage: string): string {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Already has a valid locale prefix — pass through
   const hasLocalePrefix = locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
@@ -21,11 +21,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Detect locale from Accept-Language header
   const acceptLanguage = request.headers.get('Accept-Language') ?? '';
   const locale = getLocaleFromAcceptLanguage(acceptLanguage);
 
-  // Redirect to locale-prefixed path
   const redirectUrl = new URL(`/${locale}${pathname}`, request.url);
   return NextResponse.redirect(redirectUrl, 307);
 }
