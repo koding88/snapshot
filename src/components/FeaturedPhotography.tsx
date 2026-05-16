@@ -54,7 +54,7 @@ function PhotoCard({ src, alt, caption, grayscale = false, onClick, bleedDirecti
           }}
           transition={{ duration: 0.3 }}
           className="mt-6 text-center font-serif text-[1.1rem] font-bold leading-none tracking-wide md:text-[1.38rem]"
-          
+
         >
           {caption}
         </motion.p>
@@ -70,7 +70,7 @@ export default function FeaturedPhotography() {
   const t = useTranslations('FeaturedPhotography');
 
   // Fetch galleries, get first gallery id
-  const { data: galleriesData, isLoading: galleriesLoading } = usePublicGalleries({ limit: 1 });
+  const { data: galleriesData, isLoading: galleriesLoading } = usePublicGalleries({ limit: 10 });
   const firstGalleryId = galleriesData?.items?.[0]?.id;
 
   // Fetch 4 projects from the first gallery
